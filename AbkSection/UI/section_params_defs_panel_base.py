@@ -19,7 +19,7 @@ import wx.propgrid as pg
 class SectionParamsDefsPanelBase ( wx.Dialog ):
 	
 	def __init__( self, parent ):
-		wx.Dialog.__init__ ( self, parent, id = wx.ID_ANY, title = wx.EmptyString, pos = wx.DefaultPosition, size = wx.Size( 300,700 ), style = wx.DEFAULT_DIALOG_STYLE )
+		wx.Dialog.__init__ ( self, parent, id = wx.ID_ANY, title = wx.EmptyString, pos = wx.DefaultPosition, size = wx.Size( 300,919 ), style = wx.DEFAULT_DIALOG_STYLE )
 		
 		self.SetSizeHintsSz( wx.DefaultSize, wx.DefaultSize )
 		
@@ -39,7 +39,7 @@ class SectionParamsDefsPanelBase ( wx.Dialog ):
 		
 		m_choice_section_typeChoices = [ u"直角钢", u"工字钢", u"槽钢", u"C型钢", u"T型钢", u"帽型钢", u"J型钢" ]
 		self.m_choice_section_type = wx.Choice( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, m_choice_section_typeChoices, 0 )
-		self.m_choice_section_type.SetSelection( 0 )
+		self.m_choice_section_type.SetSelection( 3 )
 		bSizer4.Add( self.m_choice_section_type, 0, wx.ALL, 5 )
 		
 		
@@ -80,22 +80,29 @@ class SectionParamsDefsPanelBase ( wx.Dialog ):
 		self.m_grid_params_defs.SetDefaultCellAlignment( wx.ALIGN_LEFT, wx.ALIGN_TOP )
 		bSizer6.Add( self.m_grid_params_defs, 0, wx.ALL, 5 )
 		
+		self.m_btn_calculation = wx.Button( self, wx.ID_ANY, u"计算", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer6.Add( self.m_btn_calculation, 0, wx.ALL, 5 )
+		
 		
 		bSizer2.Add( bSizer6, 0, wx.EXPAND, 5 )
 		
-		self.m_panel_canvas = wx.Panel( self, wx.ID_ANY, wx.DefaultPosition, wx.Size( 300,200 ), wx.TAB_TRAVERSAL )
+		self.m_panel_canvas = wx.Panel( self, wx.ID_ANY, wx.DefaultPosition, wx.Size( 300,300 ), wx.TAB_TRAVERSAL )
 		self.m_panel_canvas.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_ACTIVECAPTION ) )
 		
 		bSizer2.Add( self.m_panel_canvas, 0, wx.EXPAND |wx.ALL, 5 )
 		
-		self.m_propertyGrid_result = pg.PropertyGrid(self, wx.ID_ANY, wx.DefaultPosition, wx.Size( 300,170 ), wx.propgrid.PG_DEFAULT_STYLE)
+		self.m_propertyGrid_result = pg.PropertyGrid(self, wx.ID_ANY, wx.DefaultPosition, wx.Size( 300,300 ), wx.propgrid.PG_DEFAULT_STYLE)
 		self.m_propertyGridItem1 = self.m_propertyGrid_result.Append( pg.PropertyCategory( u"结果数据", u"结果数据" ) ) 
 		self.m_propertyGridItem2 = self.m_propertyGrid_result.Append( pg.StringProperty( u"面积                                =", u"面积                                =" ) ) 
-		self.m_propertyGridItem3 = self.m_propertyGrid_result.Append( pg.StringProperty( u"形心                                =", u"形心                                =" ) ) 
-		self.m_propertyGridItem4 = self.m_propertyGrid_result.Append( pg.StringProperty( wx.EmptyString, wx.EmptyString ) ) 
-		self.m_propertyGridItem5 = self.m_propertyGrid_result.Append( pg.StringProperty( wx.EmptyString, wx.EmptyString ) ) 
-		self.m_propertyGridItem7 = self.m_propertyGrid_result.Append( pg.StringProperty( wx.EmptyString, wx.EmptyString ) ) 
-		self.m_propertyGridItem8 = self.m_propertyGrid_result.Append( pg.StringProperty( wx.EmptyString, wx.EmptyString ) ) 
+		self.m_propertyGridItem3 = self.m_propertyGrid_result.Append( pg.StringProperty( u"Sx                                  =", u"Sx                                  =" ) ) 
+		self.m_propertyGridItem42 = self.m_propertyGrid_result.Append( pg.StringProperty( u"Sy                                  =", u"Sy                                  =" ) ) 
+		self.m_propertyGridItem4 = self.m_propertyGrid_result.Append( pg.StringProperty( u"Ix                                   =", u"Ix                                   =" ) ) 
+		self.m_propertyGridItem5 = self.m_propertyGrid_result.Append( pg.StringProperty( u"Iy                                   =", u"Iy                                   =" ) ) 
+		self.m_propertyGridItem7 = self.m_propertyGrid_result.Append( pg.StringProperty( u"Ixy                                  =", u"Ixy                                  =" ) ) 
+		self.m_propertyGridItem8 = self.m_propertyGrid_result.Append( pg.StringProperty( u"型心                                =", u"型心                                =" ) ) 
+		self.m_propertyGridItem9 = self.m_propertyGrid_result.Append( pg.StringProperty( u"主惯性角                          =", u"主惯性角                          =" ) ) 
+		self.m_propertyGridItem61 = self.m_propertyGrid_result.Append( pg.StringProperty( u"ix                                   =", u"ix                                   =" ) ) 
+		self.m_propertyGridItem62 = self.m_propertyGrid_result.Append( pg.StringProperty( u"iy                                   =", u"iy                                   =" ) ) 
 		bSizer2.Add( self.m_propertyGrid_result, 0, wx.ALL|wx.EXPAND, 5 )
 		
 		
@@ -109,6 +116,8 @@ class SectionParamsDefsPanelBase ( wx.Dialog ):
 		
 		# Connect Events
 		self.m_choice_section_type.Bind( wx.EVT_CHOICE, self.OnSelectSectionType )
+		self.m_btn_calculation.Bind( wx.EVT_BUTTON, self.m_btn_calculationOnButtonClick )
+		self.m_btn_calculation.Bind( wx.EVT_SET_FOCUS, self.m_btn_calculationOnSetFocus )
 	
 	def __del__( self ):
 		pass
@@ -116,6 +125,12 @@ class SectionParamsDefsPanelBase ( wx.Dialog ):
 	
 	# Virtual event handlers, overide them in your derived class
 	def OnSelectSectionType( self, event ):
+		event.Skip()
+	
+	def m_btn_calculationOnButtonClick( self, event ):
+		event.Skip()
+	
+	def m_btn_calculationOnSetFocus( self, event ):
 		event.Skip()
 	
 

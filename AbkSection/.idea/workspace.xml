@@ -25,7 +25,7 @@
         <entry file="file://$PROJECT_DIR$/ABKSectionPoint.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="810" column="0" selection-start-line="810" selection-start-column="0" selection-end-line="810" selection-end-column="0" />
+              <caret line="969" column="31" selection-start-line="969" selection-start-column="31" selection-end-line="969" selection-end-column="31" />
               <folding>
                 <element signature="e#25#79#0" expanded="true" />
                 <element signature="e#146#1613#0" expanded="false" />
@@ -43,8 +43,6 @@
                 <element signature="e#8491#9278#0" expanded="false" />
                 <element signature="e#9344#10192#0" expanded="false" />
                 <element signature="e#11266#11700#0" expanded="false" />
-                <element signature="e#11832#18691#0" expanded="false" />
-                <element signature="e#11943#15280#0" expanded="false" />
                 <element signature="e#15422#16204#0" expanded="false" />
                 <element signature="e#16270#17109#0" expanded="false" />
                 <element signature="e#17204#18101#0" expanded="false" />
@@ -60,7 +58,6 @@
                 <element signature="e#24503#25232#0" expanded="false" />
                 <element signature="e#25264#25814#0" expanded="false" />
                 <element signature="e#25292#25339#0" expanded="false" />
-                <element signature="e#25870#40731#0" expanded="false" />
                 <element signature="e#26289#26646#0" expanded="false" />
                 <element signature="e#40108#40731#0" expanded="false" />
                 <element signature="e#40787#41886#0" expanded="false" />
@@ -75,7 +72,7 @@
         <entry file="file://$PROJECT_DIR$/DrawSection.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="255" column="0" selection-start-line="255" selection-start-column="0" selection-end-line="255" selection-end-column="0" />
+              <caret line="26" column="31" selection-start-line="26" selection-start-column="31" selection-end-line="26" selection-end-column="31" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
                 <element signature="e#400#624#0" expanded="false" />
@@ -87,11 +84,75 @@
       <file leaf-file-name="section_params_defs_panel.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/UI/section_params_defs_panel.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.6909871">
+              <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
               <folding>
                 <element signature="e#44#53#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Isection_test.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Isection_test.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="30" column="19" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="19" />
+              <folding>
+                <element signature="e#0#29#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="grid.py" pinned="false" current-in-tab="false">
+        <entry file="file://E:/Workspace/Python27/Lib/site-packages/wx-3.0-msw/wx/grid.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="2009" column="14" selection-start-line="2009" selection-start-column="14" selection-end-line="2009" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="section_params_defs_panel_base.fbp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/UI/section_params_defs_panel_base.fbp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="140" column="18" selection-start-line="140" selection-start-column="18" selection-end-line="140" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="section_params_defs_panel_base.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/UI/section_params_defs_panel_base.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="104" column="32" selection-start-line="104" selection-start-column="32" selection-end-line="104" selection-end-column="32" />
+              <folding>
+                <element signature="e#316#325#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="propgrid.py" pinned="false" current-in-tab="false">
+        <entry file="file://E:/Workspace/Python27/Lib/site-packages/wx-3.0-msw/wx/propgrid.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="1095" column="48" selection-start-line="1095" selection-start-column="48" selection-end-line="1095" selection-end-column="48" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_propgrid.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/.PyCharm40/system/python_stubs/-766442502/wx/_propgrid.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="1732" column="4" selection-start-line="1732" selection-start-column="4" selection-end-line="1732" selection-end-column="4" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -114,7 +175,6 @@
         <option value="E:/Workspace/Python27/Lib/site-packages/sympy/geometry/polygon.py" />
         <option value="$PROJECT_DIR$/sympy_Test.py" />
         <option value="E:/Workspace/Python27/Lib/site-packages/wxmplot/plotpanel.py" />
-        <option value="$PROJECT_DIR$/UI/section_params_defs_panel_base.py" />
         <option value="$PROJECT_DIR$/test.py" />
         <option value="$PROJECT_DIR$/ABKSectionPoint.py" />
         <option value="$PROJECT_DIR$/test1.py" />
@@ -122,6 +182,8 @@
         <option value="$PROJECT_DIR$/groove.py" />
         <option value="$PROJECT_DIR$/compound_test.py" />
         <option value="$PROJECT_DIR$/DrawSection.py" />
+        <option value="$PROJECT_DIR$/UI/section_params_defs_panel_base.fbp" />
+        <option value="$PROJECT_DIR$/UI/section_params_defs_panel_base.py" />
         <option value="$PROJECT_DIR$/UI/section_params_defs_panel.py" />
       </list>
     </option>
@@ -158,7 +220,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -194,6 +255,7 @@
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -457,11 +519,11 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32875368" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3280943" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28557408" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2848723" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -514,7 +576,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="288" />
+      <option name="time" value="300" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
@@ -529,61 +591,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ABKSectionPoint.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="13" column="25" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="25" />
-          <folding>
-            <element signature="e#25#79#0" expanded="true" />
-            <element signature="e#146#1613#0" expanded="false" />
-            <element signature="e#198#1505#0" expanded="false" />
-            <element signature="e#1685#5938#0" expanded="false" />
-            <element signature="e#4231#4861#0" expanded="false" />
-            <element signature="e#4956#5404#0" expanded="false" />
-            <element signature="e#5454#5802#0" expanded="false" />
-            <element signature="e#5857#5861#0" expanded="false" />
-            <element signature="e#6010#6972#0" expanded="false" />
-            <element signature="e#6428#6916#0" expanded="false" />
-            <element signature="e#6951#6969#0" expanded="false" />
-            <element signature="e#7030#11783#0" expanded="false" />
-            <element signature="e#7104#8349#0" expanded="false" />
-            <element signature="e#8491#9278#0" expanded="false" />
-            <element signature="e#9344#10192#0" expanded="false" />
-            <element signature="e#11266#11700#0" expanded="false" />
-            <element signature="e#11832#18691#0" expanded="false" />
-            <element signature="e#11943#15280#0" expanded="false" />
-            <element signature="e#15422#16204#0" expanded="false" />
-            <element signature="e#16270#17109#0" expanded="false" />
-            <element signature="e#17204#18101#0" expanded="false" />
-            <element signature="e#18174#18608#0" expanded="false" />
-            <element signature="e#18745#24461#0" expanded="false" />
-            <element signature="e#18856#21035#0" expanded="false" />
-            <element signature="e#21087#21109#0" expanded="false" />
-            <element signature="e#21177#21964#0" expanded="false" />
-            <element signature="e#22030#22874#0" expanded="false" />
-            <element signature="e#22969#23871#0" expanded="false" />
-            <element signature="e#23944#24378#0" expanded="false" />
-            <element signature="e#24454#24458#0" expanded="false" />
-            <element signature="e#24503#25232#0" expanded="false" />
-            <element signature="e#25264#25814#0" expanded="false" />
-            <element signature="e#25292#25339#0" expanded="false" />
-            <element signature="e#25870#40731#0" expanded="false" />
-            <element signature="e#26289#26646#0" expanded="false" />
-            <element signature="e#40108#40731#0" expanded="false" />
-            <element signature="e#40787#41886#0" expanded="false" />
-            <element signature="e#41940#42038#0" expanded="false" />
-            <element signature="e#42075#43109#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="18" selection-start-line="0" selection-start-column="18" selection-end-line="0" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://E:/Workspace/Python27/Lib/site-packages/sympy/geometry/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -780,13 +787,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://E:/Workspace/Python27/Lib/site-packages/wx-3.0-msw/wx/propgrid.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="1842" column="36" selection-start-line="1842" selection-start-column="36" selection-end-line="1842" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://E:/Workspace/Python27/Lib/site-packages/wx-3.0-msw/wx/_controls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="30.633238">
@@ -798,14 +798,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3323782">
           <caret line="158" column="8" selection-start-line="158" selection-start-column="8" selection-end-line="158" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://E:/Workspace/Python27/Lib/site-packages/wx-3.0-msw/wx/_windows.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.18911175">
-          <caret line="57" column="9" selection-start-line="57" selection-start-column="9" selection-end-line="57" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -853,13 +845,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Isection_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="36" column="13" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.14054601">
@@ -881,23 +866,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/UI/section_params_defs_panel_base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.015166835">
-          <caret line="88" column="48" selection-start-line="88" selection-start-column="48" selection-end-line="88" selection-end-column="48" />
-          <folding>
-            <element signature="e#316#325#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UI/section_params_defs_panel_base.fbp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sympy_Test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.15166835">
@@ -905,10 +873,59 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/groove.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.25035766">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://E:/Workspace/Python27/Lib/site-packages/wx-3.0-msw/wx/_windows.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="18.609442">
+          <caret line="799" column="35" selection-start-line="799" selection-start-column="35" selection-end-line="799" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://E:/Workspace/Python27/Lib/site-packages/wx-3.0-msw/wx/propgrid.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="1095" column="48" selection-start-line="1095" selection-start-column="48" selection-end-line="1095" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm40/system/python_stubs/-766442502/wx/_propgrid.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="1732" column="4" selection-start-line="1732" selection-start-column="4" selection-end-line="1732" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Isection_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="30" column="19" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://E:/Workspace/Python27/Lib/site-packages/wx-3.0-msw/wx/grid.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2009" column="14" selection-start-line="2009" selection-start-column="14" selection-end-line="2009" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ABKSectionPoint.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="810" column="0" selection-start-line="810" selection-start-column="0" selection-end-line="810" selection-end-column="0" />
+          <caret line="969" column="31" selection-start-line="969" selection-start-column="31" selection-end-line="969" selection-end-column="31" />
           <folding>
             <element signature="e#25#79#0" expanded="true" />
             <element signature="e#146#1613#0" expanded="false" />
@@ -926,8 +943,6 @@
             <element signature="e#8491#9278#0" expanded="false" />
             <element signature="e#9344#10192#0" expanded="false" />
             <element signature="e#11266#11700#0" expanded="false" />
-            <element signature="e#11832#18691#0" expanded="false" />
-            <element signature="e#11943#15280#0" expanded="false" />
             <element signature="e#15422#16204#0" expanded="false" />
             <element signature="e#16270#17109#0" expanded="false" />
             <element signature="e#17204#18101#0" expanded="false" />
@@ -943,7 +958,6 @@
             <element signature="e#24503#25232#0" expanded="false" />
             <element signature="e#25264#25814#0" expanded="false" />
             <element signature="e#25292#25339#0" expanded="false" />
-            <element signature="e#25870#40731#0" expanded="false" />
             <element signature="e#26289#26646#0" expanded="false" />
             <element signature="e#40108#40731#0" expanded="false" />
             <element signature="e#40787#41886#0" expanded="false" />
@@ -953,20 +967,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/groove.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.25035766">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/DrawSection.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="255" column="0" selection-start-line="255" selection-start-column="0" selection-end-line="255" selection-end-column="0" />
+          <caret line="26" column="31" selection-start-line="26" selection-start-column="31" selection-end-line="26" selection-end-column="31" />
           <folding>
             <element signature="e#25#36#0" expanded="true" />
             <element signature="e#400#624#0" expanded="false" />
@@ -974,10 +978,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/UI/section_params_defs_panel.py">
+    <entry file="file://$PROJECT_DIR$/UI/section_params_defs_panel_base.fbp">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="140" column="18" selection-start-line="140" selection-start-column="18" selection-end-line="140" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UI/section_params_defs_panel_base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="104" column="32" selection-start-line="104" selection-start-column="32" selection-end-line="104" selection-end-column="32" />
+          <folding>
+            <element signature="e#316#325#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UI/section_params_defs_panel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6909871">
+          <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
           <folding>
             <element signature="e#44#53#0" expanded="true" />
           </folding>

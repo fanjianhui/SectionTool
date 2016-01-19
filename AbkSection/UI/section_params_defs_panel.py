@@ -5,33 +5,20 @@ from wx.lib.floatcanvas import FloatCanvas
 from section_params_defs_panel_base import SectionParamsDefsPanelBase
 # from demo_panel_frame import DemoPanelFrame
 from wxmplot import PlotPanel
+from ABKSectionPoint import *
+from DrawSection import DrawGeometry
+from wxmplot import PlotApp
 from numpy import linspace, sin, cos, random
 import matplotlib.path as mpath
 
 class SectoinParamsDefsPanel (SectionParamsDefsPanelBase):
     def __init__(self, parent):
         SectionParamsDefsPanelBase.__init__(self, parent)
+        # 用于存放 solve之后的值
+        self._args = dict()
 
-        Path = mpath.Path
-        path_data = [
-                        (Path.MOVETO, (1.58, -2.57)),
-                        (Path.CURVE4, (0.35, -1.1)),
-                        (Path.CURVE4, (-1.75, 2.0)),
-                        (Path.CURVE4, (0.375, 2.0)),
-                        (Path.LINETO, (0.85, 1.15)),
-                        (Path.CURVE4, (2.2, 3.2)),
-                        (Path.CURVE4, (3, 0.05)),
-                        (Path.CURVE4, (2.0, -0.5)),
-                        (Path.CLOSEPOLY, (1.58, -2.57)),
-                    ]
-        codes, verts = zip(*path_data)
-        path = mpath.Path(verts, codes)
-        x, y = zip(*path.vertices)
-
-        self.plotpanel = PlotPanel(self.m_panel_canvas, size=(300, 220),fontsize=5)
+        self.plotpanel = PlotPanel(self.m_panel_canvas, size=(300,300),fontsize=5)
         self.plotpanel.BuildPanel()
-
-        self.plotpanel.plot(x,y,title='section' ,fontsize=5,label='a')
 
         # 默认截面形状
         self._section_type = u'直角钢'
@@ -54,14 +41,119 @@ class SectoinParamsDefsPanel (SectionParamsDefsPanelBase):
             self.m_grid_params_defs.SetCellValue(num, 0, self.grid_value[self._section_type][num])
 
 
+
     def OnSelectSectionType(self, event):
         self._section_type = self.m_choice_section_type.GetStringSelection()
-
         section_parameter_name = self.grid_value[self._section_type]
         self.m_grid_params_defs.ClearGrid()
         for name_num in range(len(section_parameter_name)):
             self.m_grid_params_defs.SetCellValue(name_num, 0, section_parameter_name[name_num])
 
+    def m_btn_calculationOnButtonClick( self, event ):
+        print "on click btn!"
+        # 点击btn之后，获得传入的参数。
+        # 通过获得的参数生成出截面对象。
+        # 通过截面计算，得到几何数值
+        # 通过Draw对象画图，画出几何图像。
+        _args = list()
+        for num in range(len(self.grid_value[self._section_type])):
+            _args.append(float(self.m_grid_params_defs.GetCellValue(num, 1)))
+
+        sectionType = self._section_type
+
+        if sectionType == u"工字钢":
+            section = ISection(*_args)
+        elif sectionType == u"直角钢":
+            section = rightAngleSection(*_args)
+        elif sectionType == u"槽钢":
+            section = grooveSection(*_args)
+        elif sectionType == u"C型钢":
+            pass
+        elif sectionType == u"T型钢":
+            pass
+        elif sectionType == u"J型钢":
+            pass
+        elif sectionType == u"帽型钢":
+            pass
+
+        geo = GeoCalculator(section)
+        geo.Solve()
+        self._args = geo._args
+        if "Area" in self._args:
+            if self._args['Area'] < 0.0000001:
+                res = 0
+            else:
+                res = self._args['Area']
+            self.m_propertyGridItem2.SetValue(str(res))
+        if "Sx" in self._args:
+            if self._args['Sx'] < 0.0000001:
+                res = 0
+            else:
+                res = self._args['Sx']
+            self.m_propertyGridItem3.SetValue(str(res))
+        if "Sy" in self._args:
+            if self._args['Sy'] < 0.0000001:
+                res = 0
+            else:
+                res = self._args['Sy']
+            self.m_propertyGridItem42.SetValue(str(res))
+        if "Ix" in self._args:
+            if self._args['Ix'] < 0.0000001:
+                res = 0
+            else:
+                res = self._args['Ix']
+            self.m_propertyGridItem4.SetValue(str(res))
+        if "Iy" in self._args:
+            if self._args['Iy'] < 0.0000001:
+                res = 0
+            else:
+                res = self._args['Iy']
+            self.m_propertyGridItem5.SetValue(str(res))
+        if "Ixy" in self._args:
+            if self._args['Ixy'] < 0.0000001:
+                res = 0
+            else:
+                res = self._args['Ixy']
+            self.m_propertyGridItem7.SetValue(str(res))
+        if "centroid" in self._args:
+            res = self._args['centroid']
+
+            if res[0] < 0.0000001:
+                res = [0, res[1]]
+            if res[1] < 0.0000001:
+                res = [res[0], 0]
+
+            self.m_propertyGridItem8.SetValue(str(res))
+        if "tan_alfa" in self._args:
+            if self._args['tan_alfa'] < 0.0000001:
+                res = 0
+            else:
+                res = self._args['tan_alfa']
+
+            self.m_propertyGridItem9.SetValue(str(res))
+        if "ix" in self._args:
+            if self._args['ix'] < 0.0000001:
+                res = 0
+            else:
+                res = self._args['ix']
+            self.m_propertyGridItem61.SetValue(str(res))
+        if "iy" in self._args:
+            if self._args['iy'] < 0.0000001:
+                res = 0
+            else:
+                res = self._args['iy']
+            self.m_propertyGridItem62.SetValue(str(res))
+
+        Path = DrawGeometry(section)
+        Path.Draw()
+
+        self.plotpanel.clear()
+        for i in Path._paths:
+            m,n=zip(*i)
+            self.plotpanel.oplot(m,n)
+
+    def m_btn_calculationOnSetFocus( self, event ):
+        print "on btn_Set Focus!"
 
 if __name__ == '__main__':
     app = wx.App(False)
