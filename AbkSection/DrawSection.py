@@ -11,6 +11,8 @@ class DrawGeometry(object):
         self.section = section
         # 用于存放输出的
         self._paths = list()
+        self._dimen = list()
+        self._text = dict()
 
     # 预处理得出点集和圆弧集
     def __preProcess(self,section):
@@ -226,6 +228,67 @@ class DrawGeometry(object):
 
         return Path(vertices, codes, readonly=True)
 
+    # 尺寸标注：(只对参数化建模的截面使用)
+    def dimensioning(self):
+        if not isinstance(self.section,ABKSectionByParameter):
+            assert False
+        # 如果是根据实际参数形状
+        if isinstance(self.section,rightAngleSection):
+            points = self.section._args
+            arcs = self.section.cen_Points
+            self.__dieLine(points[0], points[1], 2, True)
+            self.__dieLine(points[1], points[2], 2, False)
+            self.__dieLine(points[5], points[6], 2, False)
+            self.__dieLine(points[6], points[0], 2, True)
+            self.__dieArc(arcs)
+        if isinstance(self.section,ISection):
+            
+
+    # 画圆弧标注
+    def __dieArc(self,arcs):
+        # 圆心指向末点
+        for key,value in arcs.items():
+            ps = [value[0], value[1]]
+            pe = [self.section._args[key].x,self.section._args[key].y]
+            path = [ps, pe]
+            p = ((ps[0]+pe[0])/2.,(ps[1]+pe[1])/2.)
+
+            self._dimen.append(path)
+            self._text[p] = 'R'+str(value[2])
+
+    # 画直线的标注
+    def __dieLine(self, p0, p1, offsetting, direction):
+        # 看是水平标注，还是垂直标注。
+        if p0.y == p1.y:
+            # 水平的
+            if direction:
+                path = [[p0.x,p0.y],[p0.x,p0.y-1.2*offsetting],[p0.x, p0.y-offsetting], [p1.x, p1.y-offsetting],[p1.x,p1.y-1.2*offsetting],[p1.x,p1.y]]
+            else:
+                path = [[p0.x,p0.y],[p0.x,p0.y+1.2*offsetting],[p0.x, p0.y+offsetting], [p1.x, p1.y+offsetting],[p1.x,p1.y+1.2*offsetting],[p1.x,p1.y]]
+        if p0.x == p1.x:
+            # 垂直的
+            if direction:
+                path = [[p0.x,p0.y],[p0.x-1.2*offsetting,p0.y],[p0.x-offsetting, p0.y], [p1.x-offsetting, p1.y],[p1.x-1.2*offsetting,p1.y],[p1.x,p1.y]]
+            else:
+                path = [[p0.x,p0.y],[p0.x+1.2*offsetting,p0.y],[p0.x+offsetting, p0.y], [p1.x+offsetting, p1.y],[p1.x+1.2*offsetting,p1.y],[p1.x,p1.y]]
+
+        m = path[2]
+        n = path[3]
+        if p0.x == p1.x:
+            if direction:
+                p = ((m[0]+n[0])/2.-offsetting, (m[1]+n[1])/2.)
+            else:
+                p = ((m[0]+n[0])/2.+offsetting*0.5, (m[1]+n[1])/2.)
+        if p0.y == p1.y:
+            # 垂直的
+            if direction:
+                p = ((m[0]+n[0])/2., (m[1]+n[1])/2.-offsetting)
+            else:
+                p = ((m[0]+n[0])/2., (m[1]+n[1])/2.+offsetting*0.5)
+        distance = p0.distance(p1)
+        self._text[p] = distance
+        self._dimen.append(path)
+
     # 这里或的角度是[0,2pi）
     def getAngle(self,x0, y0, x1, y1):
         if x0 != x1:
@@ -252,4 +315,3 @@ class DrawGeometry(object):
             theate =theate + 2 * np.pi
 
         return theate
-

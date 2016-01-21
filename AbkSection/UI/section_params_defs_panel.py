@@ -17,7 +17,7 @@ class SectoinParamsDefsPanel (SectionParamsDefsPanelBase):
         # 用于存放 solve之后的值
         self._args = dict()
 
-        self.plotpanel = PlotPanel(self.m_panel_canvas, size=(300,300),fontsize=5)
+        self.plotpanel = PlotPanel(self.m_panel_canvas, size=(300, 300), fontsize=5)
         self.plotpanel.BuildPanel()
 
         # 默认截面形状
@@ -40,8 +40,6 @@ class SectoinParamsDefsPanel (SectionParamsDefsPanelBase):
         for num in range(len(self.grid_value[self._section_type])):
             self.m_grid_params_defs.SetCellValue(num, 0, self.grid_value[self._section_type][num])
 
-
-
     def OnSelectSectionType(self, event):
         self._section_type = self.m_choice_section_type.GetStringSelection()
         section_parameter_name = self.grid_value[self._section_type]
@@ -50,7 +48,6 @@ class SectoinParamsDefsPanel (SectionParamsDefsPanelBase):
             self.m_grid_params_defs.SetCellValue(name_num, 0, section_parameter_name[name_num])
 
     def m_btn_calculationOnButtonClick( self, event ):
-        print "on click btn!"
         # 点击btn之后，获得传入的参数。
         # 通过获得的参数生成出截面对象。
         # 通过截面计算，得到几何数值
@@ -145,12 +142,24 @@ class SectoinParamsDefsPanel (SectionParamsDefsPanelBase):
             self.m_propertyGridItem62.SetValue(str(res))
 
         Path = DrawGeometry(section)
+
         Path.Draw()
+
+        Path.dimensioning()
 
         self.plotpanel.clear()
         for i in Path._paths:
             m,n=zip(*i)
-            self.plotpanel.oplot(m,n)
+            self.plotpanel.oplot(m,n,fullbox=False,axes_style='open')
+        for i in Path._dimen:
+            m, n = zip(*i)
+            self.plotpanel.oplot(m,n,fullbox=False,axes_style='open', linewidth=1, color='green')
+
+        # 遍历字典，画上标注
+        for key, value in Path._text.items():
+            x = key[0]
+            y = key[1]
+            self.plotpanel.add_text(str(value), x, y, size=4)
 
     def m_btn_calculationOnSetFocus( self, event ):
         print "on btn_Set Focus!"

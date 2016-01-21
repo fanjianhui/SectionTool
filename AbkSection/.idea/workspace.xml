@@ -25,7 +25,7 @@
         <entry file="file://$PROJECT_DIR$/ABKSectionPoint.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="969" column="31" selection-start-line="969" selection-start-column="31" selection-end-line="969" selection-end-column="31" />
+              <caret line="234" column="22" selection-start-line="234" selection-start-column="12" selection-end-line="234" selection-end-column="22" />
               <folding>
                 <element signature="e#25#79#0" expanded="true" />
                 <element signature="e#146#1613#0" expanded="false" />
@@ -38,8 +38,6 @@
                 <element signature="e#6010#6972#0" expanded="false" />
                 <element signature="e#6428#6916#0" expanded="false" />
                 <element signature="e#6951#6969#0" expanded="false" />
-                <element signature="e#7030#11783#0" expanded="false" />
-                <element signature="e#7104#8349#0" expanded="false" />
                 <element signature="e#8491#9278#0" expanded="false" />
                 <element signature="e#9344#10192#0" expanded="false" />
                 <element signature="e#11266#11700#0" expanded="false" />
@@ -68,27 +66,53 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DrawSection.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="DrawSection.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/DrawSection.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="26" column="31" selection-start-line="26" selection-start-column="31" selection-end-line="26" selection-end-column="31" />
+            <state vertical-scroll-proportion="0.7923729">
+              <caret line="244" column="12" selection-start-line="244" selection-start-column="12" selection-end-line="244" selection-end-column="12" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
-                <element signature="e#400#624#0" expanded="false" />
+                <element signature="e#457#681#0" expanded="false" />
+                <element signature="e#724#1053#0" expanded="false" />
+                <element signature="e#1107#1661#0" expanded="false" />
+                <element signature="e#1715#1780#0" expanded="false" />
+                <element signature="e#1836#5266#0" expanded="false" />
+                <element signature="e#5323#5555#0" expanded="false" />
+                <element signature="e#5609#7234#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="section_params_defs_panel.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="section_params_defs_panel.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/UI/section_params_defs_panel.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6909871">
-              <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="147" column="19" selection-start-line="147" selection-start-column="19" selection-end-line="147" selection-end-column="19" />
               <folding>
                 <element signature="e#44#53#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_windows.py" pinned="false" current-in-tab="false">
+        <entry file="file://E:/Workspace/Python27/Lib/site-packages/wx-3.0-msw/wx/_windows.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="804" column="0" selection-start-line="804" selection-start-column="0" selection-end-line="804" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="plotpanel.py" pinned="false" current-in-tab="false">
+        <entry file="file://E:/Workspace/Python27/Lib/site-packages/wxmplot/plotpanel.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="280" column="29" selection-start-line="280" selection-start-column="29" selection-end-line="280" selection-end-column="29" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -129,20 +153,10 @@
         <entry file="file://$PROJECT_DIR$/UI/section_params_defs_panel_base.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="104" column="32" selection-start-line="104" selection-start-column="32" selection-end-line="104" selection-end-column="32" />
+              <caret line="120" column="32" selection-start-line="120" selection-start-column="32" selection-end-line="120" selection-end-column="32" />
               <folding>
                 <element signature="e#316#325#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="propgrid.py" pinned="false" current-in-tab="false">
-        <entry file="file://E:/Workspace/Python27/Lib/site-packages/wx-3.0-msw/wx/propgrid.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="1095" column="48" selection-start-line="1095" selection-start-column="48" selection-end-line="1095" selection-end-column="48" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -181,10 +195,10 @@
         <option value="$PROJECT_DIR$/Isection_test.py" />
         <option value="$PROJECT_DIR$/groove.py" />
         <option value="$PROJECT_DIR$/compound_test.py" />
-        <option value="$PROJECT_DIR$/DrawSection.py" />
         <option value="$PROJECT_DIR$/UI/section_params_defs_panel_base.fbp" />
         <option value="$PROJECT_DIR$/UI/section_params_defs_panel_base.py" />
         <option value="$PROJECT_DIR$/UI/section_params_defs_panel.py" />
+        <option value="$PROJECT_DIR$/DrawSection.py" />
       </list>
     </option>
   </component>
@@ -220,6 +234,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -254,12 +270,10 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../test" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../PycharmProjects" />
     <property name="FullScreen" value="false" />
     <property name="recentsLimit" value="5" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
@@ -489,8 +503,8 @@
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Python.section_params_defs_panel" />
-        <item index="1" class="java.lang.String" itemvalue="Python.groove" />
-        <item index="2" class="java.lang.String" itemvalue="Python.DrawSection" />
+        <item index="1" class="java.lang.String" itemvalue="Python.DrawSection" />
+        <item index="2" class="java.lang.String" itemvalue="Python.groove" />
         <item index="3" class="java.lang.String" itemvalue="Python.compound_test" />
         <item index="4" class="java.lang.String" itemvalue="Python.Isection_test" />
       </list>
@@ -510,20 +524,20 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1176" extended-state="1" />
+    <frame x="-8" y="-8" width="1936" height="1176" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25500527" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25416666" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3280943" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32771537" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2848723" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2920269" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -576,7 +590,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="300" />
+      <option name="time" value="312" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
@@ -587,6 +601,7 @@
         <watch expression="geo1" />
         <watch expression="newIsec" />
         <watch expression="path" />
+        <watch expression="self._text" />
       </configuration>
     </watches-manager>
   </component>
@@ -823,14 +838,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://E:/Workspace/Python27/Lib/site-packages/wxmplot/plotpanel.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="4.558739">
-          <caret line="198" column="32" selection-start-line="198" selection-start-column="32" selection-end-line="198" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://E:/Workspace/Python27/Lib/site-packages/sympy/core/basic.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -880,14 +887,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://E:/Workspace/Python27/Lib/site-packages/wx-3.0-msw/wx/_windows.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="18.609442">
-          <caret line="799" column="35" selection-start-line="799" selection-start-column="35" selection-end-line="799" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://E:/Workspace/Python27/Lib/site-packages/wx-3.0-msw/wx/propgrid.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -922,10 +921,36 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/UI/section_params_defs_panel_base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="120" column="32" selection-start-line="120" selection-start-column="32" selection-end-line="120" selection-end-column="32" />
+          <folding>
+            <element signature="e#316#325#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UI/section_params_defs_panel_base.fbp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="140" column="18" selection-start-line="140" selection-start-column="18" selection-end-line="140" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://E:/Workspace/Python27/Lib/site-packages/wxmplot/plotpanel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="280" column="29" selection-start-line="280" selection-start-column="29" selection-end-line="280" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ABKSectionPoint.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="969" column="31" selection-start-line="969" selection-start-column="31" selection-end-line="969" selection-end-column="31" />
+          <caret line="234" column="22" selection-start-line="234" selection-start-column="12" selection-end-line="234" selection-end-column="22" />
           <folding>
             <element signature="e#25#79#0" expanded="true" />
             <element signature="e#146#1613#0" expanded="false" />
@@ -938,8 +963,6 @@
             <element signature="e#6010#6972#0" expanded="false" />
             <element signature="e#6428#6916#0" expanded="false" />
             <element signature="e#6951#6969#0" expanded="false" />
-            <element signature="e#7030#11783#0" expanded="false" />
-            <element signature="e#7104#8349#0" expanded="false" />
             <element signature="e#8491#9278#0" expanded="false" />
             <element signature="e#9344#10192#0" expanded="false" />
             <element signature="e#11266#11700#0" expanded="false" />
@@ -967,41 +990,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DrawSection.py">
+    <entry file="file://E:/Workspace/Python27/Lib/site-packages/wx-3.0-msw/wx/_windows.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="26" column="31" selection-start-line="26" selection-start-column="31" selection-end-line="26" selection-end-column="31" />
-          <folding>
-            <element signature="e#25#36#0" expanded="true" />
-            <element signature="e#400#624#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UI/section_params_defs_panel_base.fbp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="140" column="18" selection-start-line="140" selection-start-column="18" selection-end-line="140" selection-end-column="18" />
+          <caret line="804" column="0" selection-start-line="804" selection-start-column="0" selection-end-line="804" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UI/section_params_defs_panel_base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="104" column="32" selection-start-line="104" selection-start-column="32" selection-end-line="104" selection-end-column="32" />
-          <folding>
-            <element signature="e#316#325#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/UI/section_params_defs_panel.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6909871">
-          <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="147" column="19" selection-start-line="147" selection-start-column="19" selection-end-line="147" selection-end-column="19" />
           <folding>
             <element signature="e#44#53#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DrawSection.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7923729">
+          <caret line="244" column="12" selection-start-line="244" selection-start-column="12" selection-end-line="244" selection-end-column="12" />
+          <folding>
+            <element signature="e#25#36#0" expanded="true" />
+            <element signature="e#457#681#0" expanded="false" />
+            <element signature="e#724#1053#0" expanded="false" />
+            <element signature="e#1107#1661#0" expanded="false" />
+            <element signature="e#1715#1780#0" expanded="false" />
+            <element signature="e#1836#5266#0" expanded="false" />
+            <element signature="e#5323#5555#0" expanded="false" />
+            <element signature="e#5609#7234#0" expanded="false" />
           </folding>
         </state>
       </provider>
