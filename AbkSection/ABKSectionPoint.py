@@ -227,12 +227,65 @@ class ABKSectionByParameter(MultiConnectPoly):
     def getPoints(self):
         return self.Points
 
+    # 画圆弧标注
+    def dieArc(self,key,value,theta):
+        # 圆心指向末点
+            ps = [value[0], value[1]]
+            r = value[2]
+            theta *= pi / 180.0
+            pe = [ps[0]+r*cos(theta),ps[1]+r*cos(theta)]
+            # pe = [self._args[key].x, self._args[key].y]
+            path = [ps, pe]
+            p = ((ps[0]+pe[0])/2.,(ps[1]+pe[1])/2.)
+
+            self._dimen.append(path)
+            self._text[p] = 'R'+str(value[2])
+
+    # 画直线的标注
+    def dieLine(self, p0, p1, offsetting, direction):
+        # 看是水平标注，还是垂直标注。
+        if p0.y == p1.y:
+            # 水平的
+            if direction:
+                path = [[p0.x,p0.y],[p0.x,p0.y-1.2*offsetting],[p0.x, p0.y-offsetting], [p1.x, p1.y-offsetting],[p1.x,p1.y-1.2*offsetting],[p1.x,p1.y]]
+            else:
+                path = [[p0.x,p0.y],[p0.x,p0.y+1.2*offsetting],[p0.x, p0.y+offsetting], [p1.x, p1.y+offsetting],[p1.x,p1.y+1.2*offsetting],[p1.x,p1.y]]
+        if p0.x == p1.x:
+            # 垂直的
+            if direction:
+                path = [[p0.x,p0.y],[p0.x-1.2*offsetting,p0.y],[p0.x-offsetting, p0.y], [p1.x-offsetting, p1.y],[p1.x-1.2*offsetting,p1.y],[p1.x,p1.y]]
+            else:
+                path = [[p0.x,p0.y],[p0.x+1.2*offsetting,p0.y],[p0.x+offsetting, p0.y], [p1.x+offsetting, p1.y],[p1.x+1.2*offsetting,p1.y],[p1.x,p1.y]]
+
+        m = path[2]
+        n = path[3]
+        if p0.x == p1.x:
+            if direction:
+                p = ((m[0]+n[0])/2.-offsetting, (m[1]+n[1])/2.)
+            else:
+                p = ((m[0]+n[0])/2.+offsetting*0.5, (m[1]+n[1])/2.)
+        if p0.y == p1.y:
+            # 垂直的
+            if direction:
+                p = ((m[0]+n[0])/2., (m[1]+n[1])/2.-offsetting)
+            else:
+                p = ((m[0]+n[0])/2., (m[1]+n[1])/2.+offsetting*0.5)
+        distance = p0.distance(p1)
+        self._text[p] = distance
+        self._dimen.append(path)
 
 # 直角钢
 class rightAngleSection(ABKSectionByParameter):
     # 根据给的尺寸构造出数据结构
+
+    # 把尺寸的计算放到参数类里面来。
+
     def __new__(cls, *args):  # b1, b2, d1, d2, r
         cls.cen_Points = dict()
+
+        cls._dimen = list()
+        cls._text = dict()
+
         Check = True
         for i in args:
             if isinstance(i, Point):
@@ -265,9 +318,27 @@ class rightAngleSection(ABKSectionByParameter):
         else:
             return Polygon.__new__(cls, *args)
 
+    def __init__(self, *args):
+        super(rightAngleSection, self).__init__(*args)
+        self.getDimension(*args)
+
     @property
     def cen_ArcPoint(self):
         return self.cen_Points
+
+    # 获取尺寸
+    def getDimension(self,*args):
+        offsetting = args[0]*2/25
+        points = self._args
+        arcs = self.cen_ArcPoint
+        #把２　变成比例
+        self.dieLine(points[0], points[1], offsetting, True)
+        self.dieLine(points[1], points[2], offsetting, False)
+        self.dieLine(points[5], points[6], offsetting, False)
+        self.dieLine(points[6], points[0], offsetting, True)
+        for key,value in arcs.items():
+            if key == 3:
+                self.dieArc(key,value,225)
 
     # 坐标点的移动，生产新的截面
     def moveCoor(self, x_var, y_var):
@@ -399,6 +470,9 @@ class ISection(ABKSectionByParameter):
     # 根据给的尺寸构造出数据结构
     def __new__(cls, *args):  # h=args[0], b=args[1], d=args[2], r=args[3], r1=args[4]
         cls.cen_Points = dict()
+        cls._dimen = list()
+        cls._text = dict()
+
         h = args[0]
         b = args[1]
         d = args[2]
@@ -421,7 +495,7 @@ class ISection(ABKSectionByParameter):
                     list1 = _calculatePoint(h, b, d, t, r, r1,6., 4)
                     # p0,c0
                     Points.append(list1[0])
-                    #cls.cen_Points[0] = (list1[5].x, list1[5].y, r1)
+                    cls.cen_Points[0] = (list1[5].x, list1[5].y, r1,True)
                     # p1
                     Points.append(list1[1])
                     # p2
@@ -445,6 +519,7 @@ class ISection(ABKSectionByParameter):
                     Points.append(list1[2])
                     # p8
                     Points.append(list1[1])
+                    cls.cen_Points[8] = (list1[5].x, list1[5].y, r1,True)
                     # p9
                     Points.append(list1[0])
                     #cls.cen_Points[9] = (list1[5].x, list1[5].y, r1)
@@ -452,7 +527,7 @@ class ISection(ABKSectionByParameter):
                     list1 = _calculatePoint(h, b, d,t, r, r1,6., 2)
                     # p10
                     Points.append(list1[0])
-                    #cls.cen_Points[10] = (list1[5].x, list1[5].y, r1)
+                    cls.cen_Points[10] = (list1[5].x, list1[5].y, r1,True)
                     # p11
                     Points.append(list1[1])
                     # p12
@@ -476,6 +551,7 @@ class ISection(ABKSectionByParameter):
                     Points.append(list1[2])
                     # p18
                     Points.append(list1[1])
+                    cls.cen_Points[18] = (list1[5].x, list1[5].y, r1,True)
                     # p19
                     Points.append(list1[0])
                     #cls.cen_Points[19] = (list1[5].x, list1[5].y, r1)
@@ -488,9 +564,42 @@ class ISection(ABKSectionByParameter):
         else:
             return entity.GeometryEntity.__new__(cls, *args)
 
+    def __init__(self, *args):
+        super(ISection, self).__init__(*args)
+        self.getDimension(*args)
+
     @property
     def cen_ArcPoint(self):
         return self.cen_Points
+
+    # 获取尺寸
+    def getDimension(self,*args):
+        h = args[0]
+        b = args[1]
+        d = args[2]
+        t = args[3]
+        r = args[4]
+        r1 = args[5]
+
+        offsetting = h*2/50
+        points = self._args
+        arcs = self.cen_ArcPoint
+
+        self.dieLine(points[10], points[19], offsetting, True)
+        self.dieLine(points[19],points[0],offsetting,True)
+        point1 = Point(d/2,-h/5)
+        point2 = Point(-d/2,-h/5)
+        self.dieLine(point1, point2,offsetting, True)
+        point3 = Point((b-d)/4, h/2)
+        point4 = Point((b-d)/4, h/2-t)
+        self.dieLine(point3, point4, 4*offsetting, False)
+
+        #self.__dieLine(points[6], points[0], 2, True)
+        for key ,value in arcs.items():
+            if key == 0:
+                self.dieArc(key,value,45)
+            if key == 3:
+                self.dieArc(key,value,225)
 
     # 坐标点的移动，生产新的截面
     def moveCoor(self, x_var, y_var):
@@ -622,6 +731,8 @@ class grooveSection(ABKSectionByParameter):
      # 根据给的尺寸构造出数据结构
     def __new__(cls, *args):  # h=args[0], b=args[1], d=args[2], r=args[3], r1=args[4]
         cls.cen_Points = dict()
+        cls._dimen = list()
+        cls._text = dict()
         h = args[0]
         b = args[1]
         d = args[2]
@@ -644,21 +755,21 @@ class grooveSection(ABKSectionByParameter):
                     list1 = _calculatePoint(h, 2*b, 2*d, t, r, r1, 10., 4)
                     # p0,c0
                     Points.append(list1[0])
-                    # cls.cen_Points[0] = (list1[5].x, list1[5].y, r1)
+                    # cls.cen_Points[0] = (list1[5].x, list1[5].y, r1, True)
                     # p1
                     Points.append(list1[1])
                     # p2
                     Points.append(list1[2])
                     # p3 c1
                     Points.append(list1[3])
-                    cls.cen_Points[3] = (list1[6].x, list1[6].y, r,True)
+                    cls.cen_Points[3] = (list1[6].x, list1[6].y, r, True)
                     # p4
                     Points.append(list1[4])
 
                     list1 = _calculatePoint(h, 2*b, 2*d, t, r, r1, 10., 1)
                     # p5
                     Points.append(list1[4])
-                    cls.cen_Points[5] = (list1[6].x, list1[6].y, r,True)
+                    cls.cen_Points[5] = (list1[6].x, list1[6].y, r, True)
 
                     # p6
                     Points.append(list1[3])
@@ -668,6 +779,7 @@ class grooveSection(ABKSectionByParameter):
                     Points.append(list1[2])
                     # p8
                     Points.append(list1[1])
+                    # cls.cen_Points[8] = (list1[5].x, list1[5].y, r1, True)
                     # p9
                     Points.append(list1[0])
                     # cls.cen_Points[9] = (list1[5].x, list1[5].y, r1)
@@ -681,9 +793,41 @@ class grooveSection(ABKSectionByParameter):
         else:
             return entity.GeometryEntity.__new__(cls, *args)
 
+    def __init__(self, *args):
+        super(grooveSection, self).__init__(*args)
+        self.getDimension(*args)
+
     @property
     def cen_ArcPoint(self):
         return self.cen_Points
+
+    def getDimension(self,*args):
+        h = args[0]
+        b = args[1]
+        d = args[2]
+        t = args[3]
+        r = args[4]
+        r1 = args[5]
+
+        offsetting = h*2/50
+        points = self._args
+        arcs = self.cen_ArcPoint
+
+        self.dieLine(points[10], points[11], offsetting, True)
+        self.dieLine(points[11], points[0], offsetting, True)
+        point1 = Point(d, -h/5)
+        point2 = Point(0, -h/5)
+        self.dieLine(point1, point2,offsetting, True)
+        point3 = Point((b-d)/2, h/2)
+        point4 = Point((b-d)/2, h/2-t)
+        self.dieLine(point3, point4, 4*offsetting, False)
+
+        #self.__dieLine(points[6], points[0], 2, True)
+        for key ,value in arcs.items():
+            if key == 0:
+                self.dieArc(key,value,45)
+            if key == 3:
+                self.dieArc(key,value,225)
 
     # 坐标点的移动，生产新的截面
     def moveCoor(self, x_var, y_var):
@@ -1372,7 +1516,7 @@ def _getcp(h, b, d,t, r,r1,k):
         y0 = (5*d)/202 - (5*b)/202 - h/2 + (100*t)/101 + (((d - b + 40*t)*(b - d - 40*t + 808*r*cos(10)))/40804)**(1/2)/2
         c0 = -(b**2 + h**2 - 40*h*x0 + 4*h*y0 - 4*x0**2 - 80*x0*y0 + 4*y0**2)/(4*(10*h - b + 2*x0 + 20*y0))
         c1 = -(5*b**2 - 20*b*x0 + 2*b*y0 + 5*h**2 + 20*x0**2 - 4*x0*y0 - 20*y0**2)/(2*(10*h - b + 2*x0 + 20*y0))
-        y = ((0.16-0.045)/(-350))*h+0.165
-        x0 = x0*(1+y)
+        # y = ((0.16-0.045)/(-350))*h+0.165
+        # x0 = x0*(1+y)
 
     return Point(c0, c1), Point(x0, y0)

@@ -145,16 +145,13 @@ class SectoinParamsDefsPanel (SectionParamsDefsPanelBase):
 
         Path.Draw()
 
-        Path.dimensioning()
-
         self.plotpanel.clear()
         for i in Path._paths:
-            m,n=zip(*i)
-            self.plotpanel.oplot(m,n,fullbox=False,axes_style='open')
+                m,n=zip(*i)
+                self.plotpanel.oplot(m,n,fullbox=False,axes_style='open')
         for i in Path._dimen:
             m, n = zip(*i)
             self.plotpanel.oplot(m,n,fullbox=False,axes_style='open', linewidth=1, color='green')
-
         # ±éÀú×Öµä£¬»­ÉÏ±ê×¢
         for key, value in Path._text.items():
             x = key[0]
