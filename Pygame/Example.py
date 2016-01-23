@@ -32,10 +32,10 @@ def test1():
 
     table.setColor(2,2,'yellow')		#设置颜色
 
-    table.setMerge(3,3,1,9)			#设置合并格
-    table.setMerge(4,4,2,6)
-    table.setMerge(8,8,2,6)
-
+    table.setMerge(3,3,2,8)			#设置合并格
+    table.setMerge(4,4,3,6)
+    table.setMerge(5,8,6,6)
+    table.setMerge(5,8,3,5)
     #现在有一个问题就是这个数字变成字符串就ok。。。
 
     fontstyle=['Bell MT',1,'blue',880]
