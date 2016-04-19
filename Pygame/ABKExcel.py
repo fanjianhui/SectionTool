@@ -420,27 +420,25 @@ class ABKExcelOperator(object):
             if len(cellmeger) > 0:
                 for rlow, rhigh, clow, chigh in cellmeger:
                     if rlow == rhigh and clow != chigh:#列合并
-                        for c in range(clow+1,chigh+1):
+                        for c in range(clow,chigh+1):
                             merged.append((rlow,c))
-                        self.op_sheet.write_merge(rlow+index, rhigh+index, clow+abs_col, chigh+abs_col,'merge',style1)
+                        # merged.append()
+                        self.op_sheet.write_merge(rlow+index, rhigh+index, clow+abs_col, chigh+abs_col,'',style1)
                     elif clow == chigh and rlow != rhigh:#列合并
-                        for r in range(rlow+1,rhigh+1):
+                        for r in range(rlow,rhigh+1):
                             merged.append((r,clow))
-                        self.op_sheet.write_merge(rlow+index, rhigh+index, clow+abs_col, chigh+abs_col,'merge',style1)#,self.findValueByIndex(rlow,clow,sheetname),self.__cellstyle('white','Meiryo'))
+                        self.op_sheet.write_merge(rlow+index, rhigh+index, clow+abs_col, chigh+abs_col,'',style1)#,self.findValueByIndex(rlow,clow,sheetname),self.__cellstyle('white','Meiryo'))
                     else:
                         # 否则就是任意合并，
-                        self.op_sheet.write_merge(rlow+index, rhigh+index, clow+abs_col, chigh+abs_col,'merge',style1)#,self.findValueByIndex(rlow,clow,sheetname),self.__cellstyle('white','Meiryo'))
+                        self.op_sheet.write_merge(rlow+index, rhigh+index, clow+abs_col, chigh+abs_col,'',style1)#,self.findValueByIndex(rlow,clow,sheetname),self.__cellstyle('white','Meiryo'))
                         for r in range(rlow,rhigh+1):
-                            for c in range(clow,chigh+1):
-                                if r == rlow and c == clow:
-                                    continue
-                                else:
-                                    merged.append((r, c))
+                            for c in range(clow, chigh+1):
+                               merged.append((r, c))
 
             cell_list = table.table_data
             # whether the table has the title...
             if table.hasTitle():
-                self.op_sheet.write(index, abs_col, table.getTitle(),style1)
+                self.op_sheet.write(index, abs_col, table.getTitle(),self.__cellstyle('white'))
             for j in range(0, len(cell_list)):
                 cell = cell_list[j]
                 cellindex = cell[0]
@@ -460,7 +458,10 @@ class ABKExcelOperator(object):
                 # 如果cellindex  在merged里面：那么给一个style1
                 flag = True
                 if cellindex in merged:
-                    flag = False
+                    if cellindex[0]==0:
+                        flag = True
+                    else:
+                        flag = False
                     #self.op_sheet.write(cell_x, cell_y, cellvalue, style1)
 
                 if flag:
@@ -473,13 +474,10 @@ class ABKExcelOperator(object):
                     else:
                         self.op_sheet.write(cell_x, cell_y, cellvalue, self.__cellstyle('white'))
 
-                # 如果cellindex  在merged里面：那么给一个style1
-                if cellindex in merged:
-                    self.op_sheet.write(cell_x, cell_y, cellvalue, style1)
-
             for x, y in merged:
                 #x,y 传进来判断下他的上 下 右 是否有合并格，如果有合并个就
-                self.op_sheet.write(x+index, y+abs_col, '', style1)
+                if x == 0 and y != 0:
+                    self.op_sheet.write(x+index, y+abs_col, '',self.__cellstyle('white'))
 
 
     # 设置cell的样式
@@ -544,6 +542,9 @@ class ABKExcelOperator(object):
         style = xlwt.XFStyle() # style
         font = xlwt.Font()
         font.name = 'Times New Roman'
+        font.height = 200
+        font.bold = False
+        font.colour_index = 32767
 
         borders = xlwt.Borders()
 
