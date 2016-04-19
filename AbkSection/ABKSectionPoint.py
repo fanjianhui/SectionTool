@@ -190,7 +190,6 @@ class MultiConnectPoly(polygon.Polygon):
     def getpolylist(self):
         return self.outerLoop, self.innerLoop
 
-
 # 参数化的截面对象,是各种特殊梁的基类
 class ABKSectionByParameter(MultiConnectPoly):
     def __new__(cls, *args, **kwargs):
@@ -464,7 +463,6 @@ class rightAngleSection(ABKSectionByParameter):
     def __getDataResource(self, b1, b2, d1, d2, r):
         pass
 
-
 # 工型钢
 class ISection(ABKSectionByParameter):
     # 根据给的尺寸构造出数据结构
@@ -725,7 +723,6 @@ class ISection(ABKSectionByParameter):
     def __getDataResource(self, h, b, d, t, r, r1):
         pass
 
-
 # 槽钢
 class grooveSection(ABKSectionByParameter):
      # 根据给的尺寸构造出数据结构
@@ -918,6 +915,595 @@ class grooveSection(ABKSectionByParameter):
                 newArcPoint[key] = (p.x, p.y, value[2], value[3])
 
         res = grooveSection(*newPoint)
+        res.cen_Points = newArcPoint
+        return res
+
+    # 获取变换的矩阵
+    def __getMatrix(self,x_var,y_var,angle,pt):
+
+        m0 = Matrix([
+        [ 1, 0, 0],
+        [0, 1, 0],
+        [ x_var, y_var, 1]])
+
+        m1= Matrix([
+        [ 1, 0, 0],
+        [0, 1, 0],
+        [ -pt.x, -pt.y, 1]])
+
+        m2=Matrix([
+        [ cos(angle), sin(angle), 0],
+        [-sin(angle), cos(angle), 0],
+        [ 0, 0, 1]])
+
+        #xuanz
+        m3 = Matrix([
+        [ 1, 0, 0],
+        [0, 1, 0],
+        [ pt.x, pt.y, 1]])
+
+        m=m0*m1*m2*m3
+
+        return m
+
+    # 计算出数据结构
+    def __getDataResource(self, h, b, d, t, r, r1):
+        pass
+
+# T型钢
+
+class TshapeSection(ABKSectionByParameter):
+
+    def __new__(cls, *args):  # h,t1,t2, d1, d2
+
+        h = args[0]
+        t1 = args[1]
+        t2 = args[2]
+        d1 = args[3]
+        d2 = args[4]
+
+        cls.cen_Points = dict()
+        cls._dimen = list()
+        cls._text = dict()
+
+        Check = True
+        for i in args:
+            if isinstance(i, Point):
+                Check = False
+                break
+
+        if Check:
+            if h > 0 and t1 > 0 and t2 > 0 and d1 > 0 and d2 > 0:
+                if h > d1:
+                    p0 = Point(t2+d2/2., 0)
+                    p1 = Point(t2+d2/2., d1)
+                    p2 = Point(d2/2., d1)
+                    p3 = Point(d2/2., h)
+                    p4 = Point(-d2/2., h)
+                    p5 = Point(-d2/2., d1)
+                    p6 = Point(-(t2+d2/2.), d1)
+                    p7 = Point(-(t2+d2/2.), 0)
+
+                    return Polygon.__new__(cls, p0, p1,p2, p3, p4, p5, p6,p7)
+            else:
+                # Alert
+                assert False
+        else:
+            return Polygon.__new__(cls, *args)
+
+    def __init__(self, *args):
+        super(TshapeSection, self).__init__(*args)
+        self.getDimension(*args)
+
+    @property
+    def cen_ArcPoint(self):
+        return self.cen_Points
+
+    # 获取尺寸 每一个截面都不一样，要重写。
+    def getDimension(self,*args):
+        offsetting = args[0]*(2/25.)
+        points = self._args
+        arcs = self.cen_ArcPoint
+        #把２　变成比例
+        self.dieLine(points[0], points[1], offsetting, False)
+        self.dieLine(points[1], points[2], offsetting, True)
+        self.dieLine(points[2], points[3], offsetting, False)
+        self.dieLine(points[3], points[4], offsetting, False)
+        self.dieLine(points[5], points[6], offsetting, True)
+        #self.dieLine(points[0], points[3], offsetting, True)
+        for key,value in arcs.items():
+            if key == 3:
+                self.dieArc(key,value,225)
+
+    # 坐标点的移动，生产新的截面
+    def moveCoor(self, x_var, y_var):
+        newPoint = list()
+        newArcPoint = dict()
+        if self._args is None:
+            # Alert
+            assert False
+        # 将每一个点移动x，y
+        for i in range(0, len(self._args)):
+            # 不知道怎样是否可以真正的修改值
+            x = self._args[i].x + x_var
+            y = self._args[i].y + y_var
+            p = Point(x, y)
+            newPoint.append(p)
+        print newPoint
+        # i.x = i.x + x_var
+        # i.y = i.y + y_var
+        # 如果有圆心，圆心的值也修改掉
+        if self.cen_Points is not None:  # {1:(a,b,c)}
+            for key, value in self.cen_Points.items():
+                newArcPoint[key] = (value[0] + x_var, value[1] + y_var, value[2], value[3])
+        print newArcPoint
+        res = TshapeSection(*newPoint)
+        res.cen_Points = newArcPoint
+        return res
+
+    # 旋转之后，产生新的截面
+    def rotate(self, angle, pt=None):
+        '''
+        绕点按angle逆旋转之后，产生新的截面
+        :param angle: 旋转的角度
+        :param pt: 所绕的点
+        :return: 返回旋转之后的新截面
+        '''
+        newPoint = list()
+        newArcPoint = dict()
+        if self._args is None:
+            # Alert
+            assert False
+        # 将每一个点移动x，y
+        for i in range(0, len(self._args)):
+            # 不知道怎样是否可以真正的修改值
+            p = self._args[i].rotate(angle,pt)
+            newPoint.append(p)
+
+        # i.x = i.x + x_var
+        # i.y = i.y + y_var
+        # 如果有圆心，圆心的值也修改掉
+        if self.cen_Points is not None:  # {1:(a,b,c)}
+            for key, value in self.cen_Points.items():
+                p = Point(value[0],value[1]).rotate(angle,pt)
+                newArcPoint[key] = (p.x, p.y, value[2], value[3])
+
+        res = TshapeSection(*newPoint)
+        res.cen_Points = newArcPoint
+        return res
+
+    # 输入一个3x3的矩阵，可以对空间内的截面进行平移和旋转
+    def transform(self,x_var,y_var,angle,pt=None):
+        '''
+        绕pt旋转angle后，平移（x_var,y_var)
+        :param matrix:输入一个3x3的矩阵，可以对空间内的截面进行平移和旋转
+        :return:
+        '''
+        newPoint = list()
+        newArcPoint = dict()
+
+        if self._args is None:
+            # Alert
+            assert False
+
+        # 计算出变换矩阵
+        m = self.__getMatrix(x_var,y_var,angle,pt)
+
+        # 将每一个点移动x，y
+        for i in range(0, len(self._args)):
+            # 不知道怎样是否可以真正的修改值
+            p = self._args[i].transform(m)
+            newPoint.append(p)
+
+        # i.x = i.x + x_var
+        # i.y = i.y + y_var
+        # 如果有圆心，圆心的值也修改掉
+        if self.cen_Points is not None:  # {1:(a,b,c)}
+            for key, value in self.cen_Points.items():
+                p = Point(value[0],value[1]).transform(m)
+                newArcPoint[key] = (p.x, p.y, value[2], value[3])
+
+        res = TshapeSection(*newPoint)
+        res.cen_Points = newArcPoint
+        return res
+
+    # 获取变换的矩阵
+    def __getMatrix(self,x_var,y_var,angle,pt):
+
+        m0 = Matrix([
+        [ 1, 0, 0],
+        [0, 1, 0],
+        [ x_var, y_var, 1]])
+
+        m1= Matrix([
+        [ 1, 0, 0],
+        [0, 1, 0],
+        [ -pt.x, -pt.y, 1]])
+
+        m2=Matrix([
+        [ cos(angle), sin(angle), 0],
+        [-sin(angle), cos(angle), 0],
+        [ 0, 0, 1]])
+
+        #xuanz
+        m3 = Matrix([
+        [ 1, 0, 0],
+        [0, 1, 0],
+        [ pt.x, pt.y, 1]])
+
+        m=m0*m1*m2*m3
+
+        return m
+
+    # 计算出数据结构
+    def __getDataResource(self, b1, b2, d1, d2, r):
+        pass
+
+# J型钢
+class JshapeSection(ABKSectionByParameter):
+    def __new__(cls, *args):  # h,t1,t2,t3,d1,d2,d3
+
+        h = args[0]
+        t1 = args[1]
+        t2 = args[2]
+        t3 = args[3]
+        d1 = args[4]
+        d2 = args[5]
+        d3 = args[6]
+
+        cls.cen_Points = dict()
+        cls._dimen = list()
+        cls._text = dict()
+
+        Check = True
+        for i in args:
+            if isinstance(i, Point):
+                Check = False
+                break
+
+        if Check:
+            if h > 0 and t1 > 0 and t2 > 0 and t3 > 0 and d1 > 0 and d2 > 0 and d3 > 0:
+                # if ....输入数据是否正确有待判断
+                p0 = Point(t3+d3/2., 0)
+                p1 = Point(t3+d3/2., d2)
+                p2 = Point(d3/2., d2)
+                p3 = Point(d3/2., h+d2+d1)
+                p4 = Point(-(t1+d3/2.), h+d2+d1)
+                p5 = Point(-(t1+d3/2.), h+d2)
+                p6 = Point(-d3/2., h+d2)
+                p7 = Point(-d3/2., d2)
+                p8 = Point(-(t2+d3/2.),d2)
+                p9 = Point(-(t2+d3/2.),0)
+
+                return Polygon.__new__(cls, p0, p1,p2, p3, p4, p5, p6, p7, p8, p9)
+            else:
+                # Alert
+                assert False
+        else:
+            return Polygon.__new__(cls, *args)
+
+    def __init__(self, *args):
+        super(JshapeSection, self).__init__(*args)
+        self.getDimension(*args)
+
+    @property
+    def cen_ArcPoint(self):
+        return self.cen_Points
+
+    # 获取尺寸 每一个截面都不一样，要重写。
+    def getDimension(self,*args):
+        offsetting = args[0]*(2/25.)
+        points = self._args
+        arcs = self.cen_ArcPoint
+        #把２　变成比例
+        self.dieLine(points[0], points[1], offsetting, False)
+        self.dieLine(points[1], points[2], offsetting, True)
+        self.dieLine(points[4], points[5], offsetting, True)
+        self.dieLine(points[5], points[6], offsetting, False)
+        self.dieLine(points[6], points[7], offsetting, True)
+        # self.dieLine(points[7], points[8], offsetting, True) # 为什么会断掉呢？
+        # self.dieLine(points[8], points[9], offsetting, True)
+        for key, value in arcs.items():
+            if key == 3:
+                self.dieArc(key,value,225)
+
+    # 坐标点的移动，生产新的截面
+    def moveCoor(self, x_var, y_var):
+        newPoint = list()
+        newArcPoint = dict()
+        if self._args is None:
+            # Alert
+            assert False
+        # 将每一个点移动x，y
+        for i in range(0, len(self._args)):
+            # 不知道怎样是否可以真正的修改值
+            x = self._args[i].x + x_var
+            y = self._args[i].y + y_var
+            p = Point(x, y)
+            newPoint.append(p)
+        print newPoint
+        # i.x = i.x + x_var
+        # i.y = i.y + y_var
+        # 如果有圆心，圆心的值也修改掉
+        if self.cen_Points is not None:  # {1:(a,b,c)}
+            for key, value in self.cen_Points.items():
+                newArcPoint[key] = (value[0] + x_var, value[1] + y_var, value[2], value[3])
+        print newArcPoint
+        res = JshapeSection(*newPoint)
+        res.cen_Points = newArcPoint
+        return res
+
+    # 旋转之后，产生新的截面
+    def rotate(self, angle, pt=None):
+        '''
+        绕点按angle逆旋转之后，产生新的截面
+        :param angle: 旋转的角度
+        :param pt: 所绕的点
+        :return: 返回旋转之后的新截面
+        '''
+        newPoint = list()
+        newArcPoint = dict()
+        if self._args is None:
+            # Alert
+            assert False
+        # 将每一个点移动x，y
+        for i in range(0, len(self._args)):
+            # 不知道怎样是否可以真正的修改值
+            p = self._args[i].rotate(angle,pt)
+            newPoint.append(p)
+
+        # i.x = i.x + x_var
+        # i.y = i.y + y_var
+        # 如果有圆心，圆心的值也修改掉
+        if self.cen_Points is not None:  # {1:(a,b,c)}
+            for key, value in self.cen_Points.items():
+                p = Point(value[0],value[1]).rotate(angle,pt)
+                newArcPoint[key] = (p.x, p.y, value[2], value[3])
+
+        res = JshapeSection(*newPoint)
+        res.cen_Points = newArcPoint
+        return res
+
+    # 输入一个3x3的矩阵，可以对空间内的截面进行平移和旋转
+    def transform(self,x_var,y_var,angle,pt=None):
+        '''
+        绕pt旋转angle后，平移（x_var,y_var)
+        :param matrix:输入一个3x3的矩阵，可以对空间内的截面进行平移和旋转
+        :return:
+        '''
+        newPoint = list()
+        newArcPoint = dict()
+
+        if self._args is None:
+            # Alert
+            assert False
+
+        # 计算出变换矩阵
+        m = self.__getMatrix(x_var,y_var,angle,pt)
+
+        # 将每一个点移动x，y
+        for i in range(0, len(self._args)):
+            # 不知道怎样是否可以真正的修改值
+            p = self._args[i].transform(m)
+            newPoint.append(p)
+
+        # i.x = i.x + x_var
+        # i.y = i.y + y_var
+        # 如果有圆心，圆心的值也修改掉
+        if self.cen_Points is not None:  # {1:(a,b,c)}
+            for key, value in self.cen_Points.items():
+                p = Point(value[0],value[1]).transform(m)
+                newArcPoint[key] = (p.x, p.y, value[2], value[3])
+
+        res = JshapeSection(*newPoint)
+        res.cen_Points = newArcPoint
+        return res
+
+    # 获取变换的矩阵
+    def __getMatrix(self,x_var,y_var,angle,pt):
+
+        m0 = Matrix([
+        [ 1, 0, 0],
+        [0, 1, 0],
+        [ x_var, y_var, 1]])
+
+        m1= Matrix([
+        [ 1, 0, 0],
+        [0, 1, 0],
+        [ -pt.x, -pt.y, 1]])
+
+        m2=Matrix([
+        [ cos(angle), sin(angle), 0],
+        [-sin(angle), cos(angle), 0],
+        [ 0, 0, 1]])
+
+        #xuanz
+        m3 = Matrix([
+        [ 1, 0, 0],
+        [0, 1, 0],
+        [ pt.x, pt.y, 1]])
+
+        m=m0*m1*m2*m3
+
+        return m
+
+    # 计算出数据结构
+    def __getDataResource(self, b1, b2, d1, d2, r):
+        pass
+
+# N型钢
+class NshapeSection(ABKSectionByParameter):
+    def __new__(cls, *args):  # h,t1,t2,a,d1,d2,d3
+
+        h = args[0]
+        t1 = args[1]
+        t2 = args[2]
+        alph = args[3]*(pi/180.)
+        d1 = args[4]
+        d2 = args[5]
+        d3 = args[6]
+
+        cls.cen_Points = dict()
+        cls._dimen = list()
+        cls._text = dict()
+
+        Check = True
+        for i in args:
+            if isinstance(i, Point):
+                Check = False
+                break
+
+        if Check:
+            if h > 0 and t1 > 0 and t2 > 0 and alph > 0 and d1 > 0 and d2 > 0 and d3 > 0:
+                # if ....输入数据是否正确有待判断
+                x = float((h-d3-d1)/tan(alph))
+                p0 = Point(t2/2.-d2/float(sin(alph)), h-d3)
+                p1 = Point(t2/2.+x-d2/float(sin(alph)), d1)
+                p2 = Point(t2/2.+x-d2/float(sin(alph)), 0)
+                p3 = Point(t2/2.+x-d2/float(sin(alph))+t1, 0)
+                p4 = Point(t2/2.+x-d2/float(sin(alph))+t1, d1)
+                p5 = Point(t2/2.+x, d1)
+                p6 = Point(t2/2., h-d3)
+                p7 = Point(t2/2., h)
+
+                p8 = Point(-t2/2., h)
+                p9 = Point(-t2/2, h-d3)
+                p10 = Point(-(t2/2.+x), d1)
+                p11 = Point(-(t2/2.+x-d2/float(sin(alph))+t1), d1)
+                p12 = Point(-(t2/2.+x-d2/float(sin(alph))+t1), 0)
+                p13 = Point(-(t2/2.+x-d2/float(sin(alph))), 0)
+                p14 = Point(-(t2/2.+x-d2/float(sin(alph))), d1)
+                p15 = Point(-(t2/2.-d2/float(sin(alph))), h-d3)
+
+                return Polygon.__new__(cls, p0, p1,p2, p3, p4, p5, p6, p7, p8, p9, p10, p11,p12,p13,p14,p15)
+            else:
+                # Alert
+                assert False
+        else:
+            return Polygon.__new__(cls, *args)
+
+    def __init__(self, *args):
+        super(NshapeSection, self).__init__(*args)
+        self.getDimension(*args)
+
+    @property
+    def cen_ArcPoint(self):
+        return self.cen_Points
+
+    # 获取尺寸
+    def getDimension(self,*args):
+        h = args[0]
+        t1 = args[1]
+        t2 = args[2]
+        alph = args[3]*(pi/180.)
+        d1 = args[4]
+        d2 = args[5]
+        d3 = args[6]
+
+        offsetting = h*2/50
+        points = self._args
+        arcs = self.cen_ArcPoint
+
+        self.dieLine(points[2], points[3], offsetting, True)
+        self.dieLine(points[3],points[4],offsetting,False)
+        self.dieLine(points[6],points[7],offsetting,False)
+        self.dieLine(points[7],points[8],offsetting,False)
+        #self.__dieLine(points[6], points[0], 2, True)
+        for key ,value in arcs.items():
+            if key == 0:
+                self.dieArc(key,value,45)
+            if key == 3:
+                self.dieArc(key,value,225)
+
+    # 坐标点的移动，生产新的截面
+    def moveCoor(self, x_var, y_var):
+        newPoint = list()
+        newArcPoint = dict()
+        if self._args is None:
+            # Alert
+            assert False
+        # 将每一个点移动x，y
+        for i in range(0, len(self._args)):
+            # 不知道怎样是否可以真正的修改值
+            x = self._args[i].x + x_var
+            y = self._args[i].y + y_var
+            p = Point(x, y)
+            newPoint.append(p)
+        # print newPoint
+        # i.x = i.x + x_var
+        # i.y = i.y + y_var
+        # 如果有圆心，圆心的值也修改掉
+        if self.cen_Points is not None:  # {1:(a,b,c)}
+            for key, value in self.cen_Points.items():
+                newArcPoint[key] = (value[0] + x_var, value[1] + y_var, value[2], value[3])
+        # print newArcPoint
+        res = NshapeSection(*newPoint)
+        res.cen_Points = newArcPoint
+        return res
+
+    # 旋转之后，产生新的截面
+    def rotate(self, angle, pt=None):
+        '''
+        绕点按angle逆旋转之后，产生新的截面
+        :param angle: 旋转的角度
+        :param pt: 所绕的点
+        :return: 返回旋转之后的新截面
+        '''
+        newPoint = list()
+        newArcPoint = dict()
+        if self._args is None:
+            # Alert
+            assert False
+        # 将每一个点移动x，y
+        for i in range(0, len(self._args)):
+            # 不知道怎样是否可以真正的修改值
+            p = self._args[i].rotate(angle,pt)
+            newPoint.append(p)
+
+        # i.x = i.x + x_var
+        # i.y = i.y + y_var
+        # 如果有圆心，圆心的值也修改掉
+        if self.cen_Points is not None:  # {1:(a,b,c)}
+            for key, value in self.cen_Points.items():
+                p = Point(value[0],value[1]).rotate(angle,pt)
+                newArcPoint[key] = (p.x, p.y, value[2], value[3])
+
+        res = NshapeSection(*newPoint)
+        res.cen_Points = newArcPoint
+        return res
+
+    # 输入一个3x3的矩阵，可以对空间内的截面进行平移和旋转
+    def transform(self,x_var,y_var,angle,pt=None):
+        '''
+        绕pt旋转angle后，平移（x_var,y_var)
+        :param matrix:输入一个3x3的矩阵，可以对空间内的截面进行平移和旋转
+        :return:
+        '''
+        newPoint = list()
+        newArcPoint = dict()
+
+        if self._args is None:
+            # Alert
+            assert False
+
+        # 计算出变换矩阵
+        m = self.__getMatrix(x_var,y_var,angle,pt)
+
+        # 将每一个点移动x，y
+        for i in range(0, len(self._args)):
+            # 不知道怎样是否可以真正的修改值
+            p = self._args[i].transform(m)
+            newPoint.append(p)
+
+        # i.x = i.x + x_var
+        # i.y = i.y + y_var
+        # 如果有圆心，圆心的值也修改掉
+        if self.cen_Points is not None:  # {1:(a,b,c)}
+            for key, value in self.cen_Points.items():
+                p = Point(value[0],value[1]).transform(m)
+                newArcPoint[key] = (p.x, p.y, value[2], value[3])
+
+        res = NshapeSection(*newPoint)
         res.cen_Points = newArcPoint
         return res
 

@@ -31,10 +31,10 @@ class SectoinParamsDefsPanel (SectionParamsDefsPanelBase):
                            u'直角钢': ['边宽度1', '边宽度2', '边厚度1', '边厚度2', '内圆弧半径'],
                            u'工字钢': ['高度', '腿宽度', '腰厚度', '平均腿厚度', '内圆弧半径', '角端圆弧半径' ],
                            u'槽钢':   ['高度', '腿宽度', '腰厚度', '平均腿厚度', '内圆弧半径', '角端圆弧半径' ],
-                           u'C型钢':  ['高度', '边宽度1', '边厚度1', '腰厚度', '边厚度2', '边宽度2'],
-                           u'T型钢':  ['高度', '边厚度1', '边厚度2', '边宽度1', '边宽度2'],
-                           u'帽型钢': ['高度', '脚边宽度', '脚边厚度', '腿厚度', '腿倾角', '头边宽度', '头厚度'],
-                           u'J型钢':  ['高度', '边厚度1', '边厚度2', '边厚度3', '边宽度1', '边宽度2', '边宽度3']
+                           #u'C型钢':  ['高度', '边宽度1', '边厚度1', '腰厚度', '边厚度2', '边宽度2'],
+                           u'T型钢':  ['高度', '边宽度1', '边宽度2', '边厚度1', '边厚度2'],
+                           u'帽型钢': ['高度', '脚边宽度', '头边宽度', '腿倾角', '脚边厚度', '腿厚度', '头厚度'],
+                           u'J型钢':  ['高度', '边宽度1', '边宽度2', '边宽度3', '边厚度1', '边厚度2', '边厚度3']
                           }
 
         for num in range(len(self.grid_value[self._section_type])):
@@ -64,14 +64,14 @@ class SectoinParamsDefsPanel (SectionParamsDefsPanelBase):
             section = rightAngleSection(*_args)
         elif sectionType == u"槽钢":
             section = grooveSection(*_args)
-        elif sectionType == u"C型钢":
-            pass
+        #elif sectionType == u"C型钢":
+            #pass
         elif sectionType == u"T型钢":
-            pass
+            section = TshapeSection(*_args)
         elif sectionType == u"J型钢":
-            pass
+            section = JshapeSection(*_args)
         elif sectionType == u"帽型钢":
-            pass
+            section = NshapeSection(*_args)
 
         geo = GeoCalculator(section)
         geo.Solve()

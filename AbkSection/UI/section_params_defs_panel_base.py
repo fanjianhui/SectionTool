@@ -37,7 +37,7 @@ class SectionParamsDefsPanelBase ( wx.Dialog ):
 		self.m_staticText3.Wrap( -1 )
 		bSizer4.Add( self.m_staticText3, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
 		
-		m_choice_section_typeChoices = [ u"直角钢", u"工字钢", u"槽钢", u"C型钢", u"T型钢", u"帽型钢", u"J型钢" ]
+		m_choice_section_typeChoices = [ u"直角钢", u"工字钢", u"槽钢", u"T型钢", u"帽型钢", u"J型钢" ]
 		self.m_choice_section_type = wx.Choice( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, m_choice_section_typeChoices, 0 )
 		self.m_choice_section_type.SetSelection( 3 )
 		bSizer4.Add( self.m_choice_section_type, 0, wx.ALL, 5 )
@@ -82,21 +82,6 @@ class SectionParamsDefsPanelBase ( wx.Dialog ):
 		
 		self.m_btn_calculation = wx.Button( self, wx.ID_ANY, u"计算", wx.DefaultPosition, wx.DefaultSize, 0 )
 		bSizer6.Add( self.m_btn_calculation, 0, wx.ALL, 5 )
-		
-		bSizer61 = wx.BoxSizer( wx.VERTICAL )
-		
-		self.m_staticText5 = wx.StaticText( self, wx.ID_ANY, u"局部坐标原点：", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText5.Wrap( -1 )
-		bSizer61.Add( self.m_staticText5, 0, wx.ALL, 5 )
-		
-		self.m_textCtrl2 = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer61.Add( self.m_textCtrl2, 0, wx.ALL, 5 )
-		
-		self.m_textCtrl4 = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer61.Add( self.m_textCtrl4, 0, wx.ALL, 5 )
-		
-		
-		bSizer6.Add( bSizer61, 1, wx.EXPAND, 5 )
 		
 		
 		bSizer2.Add( bSizer6, 0, wx.EXPAND, 5 )
