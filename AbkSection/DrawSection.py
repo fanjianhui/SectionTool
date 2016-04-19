@@ -41,7 +41,7 @@ class DrawGeometry(object):
             for i in sections.outerLoop:
                 self._paths.append(self.singleDraw(i))
             if sections.innerLoop !=[]:
-                for i in self.section.innerLoop:
+                for i in sections.innerLoop:
                     self._paths.append(self.singleDraw(i))
             # 说明内环为空的
             else:

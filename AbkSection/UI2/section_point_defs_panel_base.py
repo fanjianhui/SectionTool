@@ -60,8 +60,16 @@ class SectionPointDefsPanelBase ( wx.Dialog ):
 		self.m_listBox2 = wx.ListBox( self, wx.ID_ANY, wx.DefaultPosition, wx.Size( 140,150 ), m_listBox2Choices, 0 )
 		bSizer51.Add( self.m_listBox2, 0, wx.ALL, 5 )
 		
-		self.m_button7 = wx.Button( self, wx.ID_ANY, u"生成连通域", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer51.Add( self.m_button7, 0, wx.ALL, 5 )
+		bSizer8 = wx.BoxSizer( wx.HORIZONTAL )
+		
+		self.m_button7 = wx.Button( self, wx.ID_ANY, u"Add连通域", wx.DefaultPosition, wx.Size( 65,30 ), 0 )
+		bSizer8.Add( self.m_button7, 0, wx.ALL, 5 )
+		
+		self.m_button5 = wx.Button( self, wx.ID_ANY, u"生成复连通", wx.DefaultPosition, wx.Size( 60,30 ), 0 )
+		bSizer8.Add( self.m_button5, 0, wx.ALL, 5 )
+		
+		
+		bSizer51.Add( bSizer8, 1, wx.EXPAND, 5 )
 		
 		
 		bSizer50.Add( bSizer51, 1, wx.EXPAND, 5 )
@@ -72,8 +80,16 @@ class SectionPointDefsPanelBase ( wx.Dialog ):
 		self.m_listBox3 = wx.ListBox( self, wx.ID_ANY, wx.DefaultPosition, wx.Size( 140,150 ), m_listBox3Choices, 0 )
 		bSizer52.Add( self.m_listBox3, 0, wx.ALL, 5 )
 		
-		self.m_button8 = wx.Button( self, wx.ID_ANY, u"生成组合截面", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer52.Add( self.m_button8, 0, wx.ALL, 5 )
+		bSizer10 = wx.BoxSizer( wx.HORIZONTAL )
+		
+		self.m_button8 = wx.Button( self, wx.ID_ANY, u"生成组合截面", wx.DefaultPosition, wx.Size( 75,30 ), 0 )
+		bSizer10.Add( self.m_button8, 0, wx.ALL, 5 )
+		
+		self.m_button10 = wx.Button( self, wx.ID_ANY, u"Reset", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer10.Add( self.m_button10, 0, wx.ALL, 5 )
+		
+		
+		bSizer52.Add( bSizer10, 1, wx.EXPAND, 5 )
 		
 		
 		bSizer50.Add( bSizer52, 1, wx.EXPAND, 5 )
@@ -88,8 +104,8 @@ class SectionPointDefsPanelBase ( wx.Dialog ):
 		
 		bSizer7.Add( self.m_panel1, 0, wx.EXPAND |wx.ALL, 5 )
 		
-		self.m_button9 = wx.Button( self, wx.ID_ANY, u"计算", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer7.Add( self.m_button9, 0, wx.ALL, 5 )
+		self.m_button11 = wx.Button( self, wx.ID_ANY, u"输出数据文件", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer7.Add( self.m_button11, 0, wx.ALL, 5 )
 		
 		
 		bSizer2.Add( bSizer7, 1, wx.EXPAND, 5 )
@@ -98,14 +114,14 @@ class SectionPointDefsPanelBase ( wx.Dialog ):
 		self.m_propertyGridItem1 = self.m_propertyGrid_result.Append( pg.PropertyCategory( u"结果数据", u"结果数据" ) ) 
 		self.m_propertyGridItem2 = self.m_propertyGrid_result.Append( pg.StringProperty( u"面积          =", u"面积          =" ) ) 
 		self.m_propertyGridItem3 = self.m_propertyGrid_result.Append( pg.StringProperty( u"Sx     ", u"Sx     " ) ) 
-		self.m_propertyGridItem4 = self.m_propertyGrid_result.Append( pg.StringProperty( u"Sy", u"Sy" ) ) 
-		self.m_propertyGridItem6 = self.m_propertyGrid_result.Append( pg.StringProperty( u"Ix", u"Ix" ) ) 
-		self.m_propertyGridItem7 = self.m_propertyGrid_result.Append( pg.StringProperty( u"Iy", u"Iy" ) ) 
-		self.m_propertyGridItem9 = self.m_propertyGrid_result.Append( pg.StringProperty( u"Ixy", u"Ixy" ) ) 
-		self.m_propertyGridItem10 = self.m_propertyGrid_result.Append( pg.StringProperty( u"型心", u"型心" ) ) 
-		self.m_propertyGridItem11 = self.m_propertyGrid_result.Append( pg.StringProperty( u"主惯性角", u"主惯性角" ) ) 
-		self.m_propertyGridItem12 = self.m_propertyGrid_result.Append( pg.StringProperty( u"ix", u"ix" ) ) 
-		self.m_propertyGridItem13 = self.m_propertyGrid_result.Append( pg.StringProperty( u"iy      ", u"iy      " ) ) 
+		self.m_propertyGridItem42 = self.m_propertyGrid_result.Append( pg.StringProperty( u"Sy", u"Sy" ) ) 
+		self.m_propertyGridItem4 = self.m_propertyGrid_result.Append( pg.StringProperty( u"Ix", u"Ix" ) ) 
+		self.m_propertyGridItem5 = self.m_propertyGrid_result.Append( pg.StringProperty( u"Iy", u"Iy" ) ) 
+		self.m_propertyGridItem7 = self.m_propertyGrid_result.Append( pg.StringProperty( u"Ixy", u"Ixy" ) ) 
+		self.m_propertyGridItem8 = self.m_propertyGrid_result.Append( pg.StringProperty( u"型心", u"型心" ) ) 
+		self.m_propertyGridItem9 = self.m_propertyGrid_result.Append( pg.StringProperty( u"主惯性角", u"主惯性角" ) ) 
+		self.m_propertyGridItem61 = self.m_propertyGrid_result.Append( pg.StringProperty( u"ix", u"ix" ) ) 
+		self.m_propertyGridItem62 = self.m_propertyGrid_result.Append( pg.StringProperty( u"iy      ", u"iy      " ) ) 
 		bSizer2.Add( self.m_propertyGrid_result, 1, wx.ALL, 5 )
 		
 		
@@ -119,9 +135,13 @@ class SectionPointDefsPanelBase ( wx.Dialog ):
 		
 		# Connect Events
 		self.m_button1.Bind( wx.EVT_BUTTON, self.m_btn_InsertOnButtonClick )
-		self.m_button7.Bind( wx.EVT_BUTTON, self.btn_genMultiPropOnButtonClick )
+		self.m_listBox2.Bind( wx.EVT_RIGHT_UP, self.del_OnRightClick )
+		self.m_button7.Bind( wx.EVT_BUTTON, self.btn_addMultiPropOnButtonClick )
+		self.m_button5.Bind( wx.EVT_BUTTON, self.btn_genMultiPropOnButtonClick )
+		self.m_listBox3.Bind( wx.EVT_LEFT_DCLICK, self.showItemOnDClick )
 		self.m_button8.Bind( wx.EVT_BUTTON, self.btn_genCompOnButtonClick )
-		self.m_button9.Bind( wx.EVT_BUTTON, self.btn_caculationOnButtonClick )
+		self.m_button10.Bind( wx.EVT_BUTTON, self.btn_DataClearOnClickButton )
+		self.m_button11.Bind( wx.EVT_BUTTON, self.btn_PrintDataOnclick )
 	
 	def __del__( self ):
 		pass
@@ -131,13 +151,25 @@ class SectionPointDefsPanelBase ( wx.Dialog ):
 	def m_btn_InsertOnButtonClick( self, event ):
 		event.Skip()
 	
+	def del_OnRightClick( self, event ):
+		event.Skip()
+	
+	def btn_addMultiPropOnButtonClick( self, event ):
+		event.Skip()
+	
 	def btn_genMultiPropOnButtonClick( self, event ):
+		event.Skip()
+	
+	def showItemOnDClick( self, event ):
 		event.Skip()
 	
 	def btn_genCompOnButtonClick( self, event ):
 		event.Skip()
 	
-	def btn_caculationOnButtonClick( self, event ):
+	def btn_DataClearOnClickButton( self, event ):
+		event.Skip()
+	
+	def btn_PrintDataOnclick( self, event ):
 		event.Skip()
 	
 

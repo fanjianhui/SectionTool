@@ -1635,7 +1635,8 @@ class GeoCalculator(object):
     def __comSolve(self,section):
         temp_dict = dict()
         for i in section.dataResource:
-            temp_dict = self.__sumValue(temp_dict, self.__MpSolve(i),0)
+            if isinstance(i,MultiConnectPoly):
+                temp_dict = self.__sumValue(temp_dict, self.__MpSolve(i),0)
         return temp_dict
 
     # 求解复联通的poly
@@ -1645,7 +1646,8 @@ class GeoCalculator(object):
             for i in sections.outerLoop:
                 temp_dict = self.__sumValue(temp_dict,self.__SolveSingleSection(i),0)
             if sections.innerLoop !=[]:
-                for i in self.section.innerLoop:
+                comp_list = sections.innerLoop
+                for i in comp_list:
                     temp_dict = self.__sumValue(temp_dict,self.__SolveSingleSection(i),1)
             # 说明内环为空的
             else:

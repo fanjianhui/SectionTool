@@ -142,7 +142,6 @@ class SectoinParamsDefsPanel (SectionParamsDefsPanelBase):
             self.m_propertyGridItem62.SetValue(str(res))
 
         Path = DrawGeometry(section)
-
         Path.Draw()
 
         self.plotpanel.clear()
