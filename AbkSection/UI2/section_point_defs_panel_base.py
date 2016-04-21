@@ -85,8 +85,8 @@ class SectionPointDefsPanelBase ( wx.Dialog ):
 		self.m_button8 = wx.Button( self, wx.ID_ANY, u"生成组合截面", wx.DefaultPosition, wx.Size( 75,30 ), 0 )
 		bSizer10.Add( self.m_button8, 0, wx.ALL, 5 )
 		
-		self.m_button10 = wx.Button( self, wx.ID_ANY, u"Reset", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer10.Add( self.m_button10, 0, wx.ALL, 5 )
+		self.m_button81 = wx.Button( self, wx.ID_ANY, u"Reset", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer10.Add( self.m_button81, 0, wx.ALL, 5 )
 		
 		
 		bSizer52.Add( bSizer10, 1, wx.EXPAND, 5 )
@@ -104,8 +104,19 @@ class SectionPointDefsPanelBase ( wx.Dialog ):
 		
 		bSizer7.Add( self.m_panel1, 0, wx.EXPAND |wx.ALL, 5 )
 		
-		self.m_button11 = wx.Button( self, wx.ID_ANY, u"输出数据文件", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer7.Add( self.m_button11, 0, wx.ALL, 5 )
+		bSizer9 = wx.BoxSizer( wx.HORIZONTAL )
+		
+		self.m_button9 = wx.Button( self, wx.ID_ANY, u"打印数据", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer9.Add( self.m_button9, 0, wx.ALL, 5 )
+		
+		self.m_button6 = wx.Button( self, wx.ID_ANY, u"存入截面库", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer9.Add( self.m_button6, 0, wx.ALL, 5 )
+		
+		self.m_button82 = wx.Button( self, wx.ID_ANY, u"查看截面库", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer9.Add( self.m_button82, 0, wx.ALL, 5 )
+		
+		
+		bSizer7.Add( bSizer9, 1, wx.EXPAND, 5 )
 		
 		
 		bSizer2.Add( bSizer7, 1, wx.EXPAND, 5 )
@@ -140,8 +151,10 @@ class SectionPointDefsPanelBase ( wx.Dialog ):
 		self.m_button5.Bind( wx.EVT_BUTTON, self.btn_genMultiPropOnButtonClick )
 		self.m_listBox3.Bind( wx.EVT_LEFT_DCLICK, self.showItemOnDClick )
 		self.m_button8.Bind( wx.EVT_BUTTON, self.btn_genCompOnButtonClick )
-		self.m_button10.Bind( wx.EVT_BUTTON, self.btn_DataClearOnClickButton )
-		self.m_button11.Bind( wx.EVT_BUTTON, self.btn_PrintDataOnclick )
+		self.m_button81.Bind( wx.EVT_BUTTON, self.btn_DataClearOnClickButton )
+		self.m_button9.Bind( wx.EVT_BUTTON, self.btn_PrintDataOnclick )
+		self.m_button6.Bind( wx.EVT_BUTTON, self.btn_insertToLibOnButtonClick )
+		self.m_button82.Bind( wx.EVT_BUTTON, self.checkLibOnButtonClick )
 	
 	def __del__( self ):
 		pass
@@ -170,6 +183,12 @@ class SectionPointDefsPanelBase ( wx.Dialog ):
 		event.Skip()
 	
 	def btn_PrintDataOnclick( self, event ):
+		event.Skip()
+	
+	def btn_insertToLibOnButtonClick( self, event ):
+		event.Skip()
+	
+	def checkLibOnButtonClick( self, event ):
 		event.Skip()
 	
 

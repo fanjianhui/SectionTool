@@ -2,6 +2,8 @@
 from sympy.geometry import point, line, polygon,entity
 from sympy import *
 import math
+import MySQLdb
+import shutil
 # 圆弧对象：
 class ABKArc(object):
     # 提供2中方式建立实体
@@ -1577,25 +1579,56 @@ class SectionLibrary:
         self.count = 0
         self.libSection = list()
 
+        self.conn = MySQLdb.connect(
+        host='localhost',
+        port = 3306,
+        user='root',
+        passwd='database',
+        db ='test',
+        )
+        self.cur = self.conn.cursor()
+
     # 获取当前的count
     def __getcount(self):
         return self.count
 
     # 添加截面
-    def addSection(self, sections):
+    def addSection(self, ID, ImageURL, _args):
+
         i = self.__getcount() + 1
-        list1 = [i, sections]
         self.count += 1
 
-    # 删除截面
+        res = _args['centroid']
+        res[0] = round(res[0]*10000)/10000.
+        res[1] = round(res[1]*10000)/10000.
+
+        #插入一条数据
+        sqli = "insert into sectionlib.sectioninfo values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+        self.cur.execute(sqli,(ID,ImageURL,_args['Area'],_args['Sx'],_args['Sy'],_args['Iy'],_args['Ix'],_args['Ixy'],str(res),_args['tan_alfa'],_args['ix'],_args['iy'], 1))
+
+        self.cur.close()
+        self.conn.commit()
+        self.conn.close()
+
+    # 删除截面,怎么删呢？把图片库中的图片删除，再把数据库中的信息删除
     def deleteSectionByID(self, ID):
-        if ID > 0 and ID < len(self.libSection):
-            self.libSection.pop(ID)
+        #if ID > 0 and ID < len(self.libSection):
+            #self.libSection.pop(ID)
+        sql = "delete from sectionlib.sectioninfo where id='"+ ID +"'"
+        self.cur.execute(sql)
+
+        self.cur.close()
+        self.conn.commit()
+        self.conn.close()
 
     # 查看截面
-    def selectSection(self, ID):
+    def selectAllSection(self):
         # 与界面相关
-        pass
+        # self.cur.execute("select * from sectioninfo")
+        n = self.cur.execute("select * from sectionlib.sectioninfo")
+        info = self.cur.fetchmany(n)
+        self.count = len(info)
+        return info
 
     # 生成文件,包含截面库中的信息
     def genFile(self):

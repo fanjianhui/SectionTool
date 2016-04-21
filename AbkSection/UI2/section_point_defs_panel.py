@@ -2,6 +2,8 @@
 # -*- coding: GBK -*-
 import wx
 import os
+import xlsxwriter
+import datetime
 from wx.lib.floatcanvas import FloatCanvas
 from section_point_defs_panel_base import SectionPointDefsPanelBase
 # from demo_panel_frame import DemoPanelFrame
@@ -13,6 +15,7 @@ from numpy import linspace, sin, cos, random
 import matplotlib.path as mpath
 
 class SectoinPointDefsPanel (SectionPointDefsPanelBase):
+
     def __init__(self, parent):
         SectionPointDefsPanelBase.__init__(self, parent)
         # 用于存放 solve之后的值
@@ -214,7 +217,153 @@ class SectoinPointDefsPanel (SectionPointDefsPanelBase):
         # 还要把listpoint里的去掉
 
     def btn_PrintDataOnclick( self, event ):
-        self.plotpanel.save_figure(os.path.abspath(os.curdir),transparent=False,dpi=300)
+        # procedure 1:生成UI2.png,2:
+        path = os.path.abspath(os.curdir)+'//section.png'
+        if hasattr(self, 'fig'):
+            self.plotpanel.fig.savefig(path, transparent=False, dpi=300)
+        else:
+            self.plotpanel.canvas.print_figure(path, transparent=False, dpi=300)
+        if (path.find(self.plotpanel.launch_dir) ==  0):
+            path = path[len(self.plotpanel.launch_dir)+1:]
+        self.plotpanel.write_message('Saved plot to %s' % path)
+
+        self.filePrint()
+
+    def filePrint(self):
+        # Create an new Excel file and add a worksheet.
+        workbook = xlsxwriter.Workbook('reportData.xlsx')
+        worksheet = workbook.add_worksheet()
+
+        # Widen the first column to make the text clearer.
+        worksheet.set_column('A:A', 15)
+        worksheet.set_column('B:B', 15)
+
+        ID = self.__getcurrentTimeID()
+
+        worksheet.write('A2', 'ID:')
+        worksheet.write('B2', ID)
+
+        worksheet.write('A3', 'Area:')
+        worksheet.write('B3', self._args['Area'])
+
+        worksheet.write('A4', 'Sx')
+        worksheet.write('B4', self._args['Sx'])
+
+        worksheet.write('A5', 'Sy')
+        worksheet.write('B5', self._args['Sy'])
+
+        worksheet.write('A6', 'Ix')
+        worksheet.write('B6', self._args['Ix'])
+
+        worksheet.write('A7', 'Iy')
+        worksheet.write('B7', self._args['Iy'])
+
+        worksheet.write('A8', 'Ixy')
+        worksheet.write('B8', self._args['Ixy'])
+
+        worksheet.write('A9', 'centroid')
+        worksheet.write('B9', str(self._args['centroid']))
+
+        worksheet.write('A10', 'tan_alfa')
+        worksheet.write('B10', str(self._args['tan_alfa']))
+
+        worksheet.write('A11', 'ix')
+        worksheet.write('B11', self._args['ix'])
+
+        worksheet.write('A12', 'iy')
+        worksheet.write('B12', self._args['iy'])
+
+        worksheet.insert_image('F2', 'section.png')
+
+        workbook.close()
+
+    def __getcurrentTimeID(self):
+        currenttime = datetime.datetime.now()
+        currenttime = str(currenttime.isoformat())
+        currenttime = currenttime[0:len(currenttime)-6]
+        for c in '-:.T': # "
+            currenttime = currenttime.replace(c, '')
+
+        return currenttime
+
+    def btn_insertToLibOnButtonClick( self, event ):
+        # 将该信息存放到库文件中。
+        # workbook = xlsxwriter.Workbook('Library.xlsx')
+        # 两个步骤：1把section的图片save到lib中，并改名为ID.png
+        # 存入数据库。只有打印的时候才有文件。一次性打印出来。
+
+        ID = self.__getcurrentTimeID()
+
+        ImageURL = ID+'.png'
+
+        lib = SectionLibrary()
+
+        lib.addSection(ID,ImageURL,self._args)
+
+        # 然后再把图片存到ImageLIB中
+        shutil.copy('section.png',"..\\ImageLib\\"+ImageURL)
+
+        # 然后再update一下存放着所有的信息的文件。
+        self.__updateLibFile(lib)
+
+    def __updateLibFile(self,lib):
+        workbook = xlsxwriter.Workbook('LibInfo.xlsx')
+        worksheet = workbook.add_worksheet()
+        worksheet.set_column('A:A', 15)
+        worksheet.set_column('B:B', 15)
+
+        # 我要获取info
+        info = lib.selectAllSection()
+
+        self.__worksheet_write(worksheet,info)
+
+        workbook.close()
+
+    def __worksheet_write(self,ws,info):
+        count = 0
+        for singleSec in info:
+            # 计数
+            ws.write('A'+ str(count*15+1), 'ID')
+            ws.write('B'+ str(count*15+1), singleSec[0])
+
+            ws.insert_image('F'+str(count*15+1), "..\\ImageLib\\" + singleSec[1])
+
+            ws.write('A'+ str(count*15+2), 'Area')
+            ws.write('B'+ str(count*15+2), singleSec[2])
+
+            ws.write('A'+ str(count*15+3), 'Sx')
+            ws.write('B'+ str(count*15+3), singleSec[3])
+
+            ws.write('A'+ str(count*15+4), 'Sy')
+            ws.write('B'+ str(count*15+4),singleSec[4])
+
+            ws.write('A'+ str(count*15+5), 'Iy')
+            ws.write('B'+ str(count*15+5),singleSec[5])
+
+            ws.write('A'+ str(count*15+6), 'Ix')
+            ws.write('B'+ str(count*15+6),singleSec[6])
+
+            ws.write('A'+ str(count*15+7), 'Ixy')
+            ws.write('B'+ str(count*15+7),singleSec[7])
+
+            ws.write('A'+ str(count*15+8), 'Centroid')
+            ws.write('B'+ str(count*15+8),singleSec[8])
+
+            ws.write('A'+ str(count*15+9), 'Angle')
+            ws.write('B'+ str(count*15+9),singleSec[9])
+
+            ws.write('A'+ str(count*15+10), 'ix')
+            ws.write('B'+ str(count*15+10),singleSec[10])
+
+            ws.write('A'+ str(count*15+11), 'iy')
+            ws.write('B'+ str(count*15+11), singleSec[11])
+
+            count = count+1
+
+    def checkLibOnButtonClick( self, event ):
+        lib = SectionLibrary()
+        self.__updateLibFile(lib)
+        os.system("LibInfo.xlsx")
 
 
 if __name__ == '__main__':
