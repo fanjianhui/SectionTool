@@ -1599,12 +1599,17 @@ class SectionLibrary:
         self.count += 1
 
         res = _args['centroid']
-        res[0] = round(res[0]*10000)/10000.
-        res[1] = round(res[1]*10000)/10000.
 
+        res0 = str(res[0])
+        res0 = res0[0:10]
+
+        res1 = str(res[1])
+        res1 = res1[0:10]
+
+        cen = "["+res0+","+res1+"]"
         #插入一条数据
         sqli = "insert into sectionlib.sectioninfo values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-        self.cur.execute(sqli,(ID,ImageURL,_args['Area'],_args['Sx'],_args['Sy'],_args['Iy'],_args['Ix'],_args['Ixy'],str(res),_args['tan_alfa'],_args['ix'],_args['iy'], 1))
+        self.cur.execute(sqli,(ID,ImageURL,_args['Area'],_args['Sx'],_args['Sy'],_args['Iy'],_args['Ix'],_args['Ixy'], cen, _args['tan_alfa'],_args['ix'],_args['iy'], 1))
 
         self.cur.close()
         self.conn.commit()
@@ -1698,20 +1703,26 @@ class GeoCalculator(object):
     def __sumValue(self,_argsDict,valueDict,type):
         for key,value in valueDict.items():
             if isinstance(value,float):
-                if key in _argsDict:
-                    if type == 0:
-                        _argsDict[key] += value
-                    if type == 1:
-                        _argsDict[key] -= value
+                if key == 'tan_alfa':
+                    if key in _argsDict:
+                        _argsDict[key] = (_argsDict[key]+value)/2.
+                    else:
+                         _argsDict[key] = value
                 else:
-                    _argsDict[key] = value
+                    if key in _argsDict:
+                        if type == 0:
+                            _argsDict[key] += value
+                        if type == 1:
+                            _argsDict[key] -= value
+                    else:
+                        _argsDict[key] = value
             # 是一个[x_var,y_var]
             if isinstance(value, list):
                 if key in _argsDict:
                     if type == 0:
-                        _argsDict[key] = [_argsDict[key][0]+value[0], _argsDict[key][1]+value[1]]
+                        _argsDict[key] = [(_argsDict[key][0]+value[0])/2, (_argsDict[key][1]+value[1])/2]
                     if type == 1:
-                        _argsDict[key] = [_argsDict[key][0]-value[0], _argsDict[key][1]-value[1]]
+                        _argsDict[key] = [(_argsDict[key][0]+value[0])/2, (_argsDict[key][1]+value[1])/2]
                 else:
                     _argsDict[key] = [value[0],value[1]]
 

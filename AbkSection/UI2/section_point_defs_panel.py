@@ -292,6 +292,15 @@ class SectoinPointDefsPanel (SectionPointDefsPanelBase):
         # 两个步骤：1把section的图片save到lib中，并改名为ID.png
         # 存入数据库。只有打印的时候才有文件。一次性打印出来。
 
+        path = os.path.abspath(os.curdir)+'//section.png'
+        if hasattr(self, 'fig'):
+            self.plotpanel.fig.savefig(path, transparent=False, dpi=300)
+        else:
+            self.plotpanel.canvas.print_figure(path, transparent=False, dpi=300)
+        if (path.find(self.plotpanel.launch_dir) ==  0):
+            path = path[len(self.plotpanel.launch_dir)+1:]
+        self.plotpanel.write_message('Saved plot to %s' % path)
+
         ID = self.__getcurrentTimeID()
 
         ImageURL = ID+'.png'
@@ -304,7 +313,7 @@ class SectoinPointDefsPanel (SectionPointDefsPanelBase):
         shutil.copy('section.png',"..\\ImageLib\\"+ImageURL)
 
         # 然后再update一下存放着所有的信息的文件。
-        self.__updateLibFile(lib)
+        # self.__updateLibFile(lib)
 
     def __updateLibFile(self,lib):
         workbook = xlsxwriter.Workbook('LibInfo.xlsx')
