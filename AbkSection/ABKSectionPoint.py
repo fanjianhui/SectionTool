@@ -1,5 +1,5 @@
 ## -*- coding: utf-8 -*-
-from sympy.geometry import point, line, polygon,entity
+from sympy.geometry import point, line, polygon, entity
 from sympy import *
 import math
 import MySQLdb
@@ -1675,6 +1675,8 @@ class GeoCalculator(object):
         for i in section.dataResource:
             if isinstance(i,MultiConnectPoly):
                 temp_dict = self.__sumValue(temp_dict, self.__MpSolve(i),0)
+
+        temp_dict = self.__updateResult(temp_dict)
         return temp_dict
 
     # 求解复联通的poly
@@ -1697,13 +1699,38 @@ class GeoCalculator(object):
             else:
                 assert False
 
+        temp_dict = self.__updateResult(temp_dict)
+
+        return temp_dict
+
+    def __updateResult(self,temp_dict):
+        temp_dict['ix'] = sqrt(temp_dict['Ix']/temp_dict['Area'])
+        temp_dict['iy'] = sqrt(temp_dict['Iy']/temp_dict['Area'])
+
+        ave_x = temp_dict['Sx']/temp_dict['Area']
+        ave_y = temp_dict['Sy']/temp_dict['Area']
+        temp_dict['centroid'][0] = ave_x
+        temp_dict['centroid'][1] = ave_y
+
+        Ix = temp_dict['Ix']
+        Iy = temp_dict['Iy']
+        Ixy = temp_dict['Ixy']
+
+        if Iy - Ix == 0:
+            alfa = pi / 4
+        else:
+            res = 2 * Ixy / (Iy - Ix)
+            res = atan(res)
+            alfa = (res) / 2.
+        temp_dict['tan_alfa'] = float(alfa)
+
         return temp_dict
 
     # 对所有单连通值进行求和
     def __sumValue(self,_argsDict,valueDict,type):
         for key,value in valueDict.items():
             if isinstance(value,float):
-                if key == 'tan_alfa':
+                if key == 'tan_alfa' or key == 'ix' or key == 'iy':
                     if key in _argsDict:
                         _argsDict[key] = (_argsDict[key]+value)/2.
                     else:
